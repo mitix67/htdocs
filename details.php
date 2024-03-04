@@ -57,31 +57,18 @@
     </div>
   </div>
 </nav>
- <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-                <div class="d-flex justify-content-center">
-                    <div class="text-center">
-                        <h1 class="mx-auto my-0 text-uppercase">Carrllix</h1>
-                        <h2 class="text-white-50 mx-auto mt-2 mb-5">Wynajmij swój wymarzony samochód!</h2>
-                        <a class="btn btn-dark" href="#about">Rozpocznij</a>
-                    </div>
-                </div>
+<section class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="images/image.jpg" alt="Image" class="img-fluid">
+            <div id="image-gallery" class="mt-3">
+                <!-- Add your image gallery slider code here -->
             </div>
-        </header>
-        <section class="about-section text-center" id="about">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2 class="text-white mb-4">Wypróbuj swój wymarzony samochód</h2>
-                        <p class="text-white-50">
-                            Posiadamy ogromny wybór samochodów, które możesz wynająć na dowolny okres czasu.
-                            Większość naszej floty to ikoniczne pojazdy z lat 90-tych, które z pewnością zwrócą uwagę innych.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+        </div>
+        <div class="col-md-6">
+            <h2>Text</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id aliquam tincidunt, nisl nunc lacinia nunc, ac tincidunt nunc nunc nec nunc. Sed auctor, nunc id aliquam tincidunt, nisl nunc lacinia nunc, ac tincidunt nunc nunc nec nunc.</p>
+        </div>
+    </div>
+</section>
 </html>
