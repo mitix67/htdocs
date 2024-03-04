@@ -118,7 +118,7 @@ function generateCard($wynik)
                     </div>
                     <div class="row mt-2">
                         <div class="col">
-                            <button class="btn btn-primary btn-block">Szczegóły</button>
+                            <a href="details.php?id='.$wiersz["id"].'"><button class="btn btn-primary btn-block">Szczegóły</button></a>
                         </div>
                         <div class="col d-flex justify-content-end">
                             <button class="btn btn-success btn-block">Rezerwuj</button>
@@ -131,13 +131,52 @@ function generateCard($wynik)
     }
 }
 
-function getImagePathById($conn, $id) {
-    $sql = "SELECT sciezka FROM samochody WHERE id='$id'";
+function getDetailsById($conn, $id, $detail)
+{
+    $sql = "SELECT $detail FROM samochody WHERE id='$id'";
     $result = querySelect($conn, $sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        return $row['sciezka'];
+        return $row[$detail];
+    } 
+    else {
+        return null;
+    }
+}
+
+
+//function to get path to 3 images, you must join them by 'id' tables: samochody and images
+function getImagesPathById($conn, $id) {
+    $sql = "SELECT * FROM images WHERE id='$id'";
+    $result = querySelect($conn, $sql);
+
+    $brand = getDetailsById($conn, $id, 'marka');
+    $model = getDetailsById($conn, $id, 'model');
+    
+    $directory = "images/".$brand."/".$model."/";
+
+    
+    if ($result->num_rows > 0) {
+        while($wiersz = $result -> fetch_assoc())
+        {
+            $i = 1;
+            $number = 'image'.$i;
+            $image = $wiersz[$number];
+            if ($image == null) {
+                break;
+            }
+            else {
+                while ($i < 4)
+                {
+                    $number = 'image'.$i;
+                    $image = $wiersz[$number];
+                    echo '
+                    <img src="'.$directory.''.$image.'" alt="Image '.$i.'" class="slider-container-img">';
+                    $i++;
+                }
+            }
+        }
     } 
     else {
         return null;

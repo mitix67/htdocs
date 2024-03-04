@@ -15,6 +15,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+    <?php require_once 'functions.php'; 
+    $conn = connectToDatabase();
+
+    if (isset($_GET['id'])) {
+      $id = $_GET['id'];
+      // Your code to handle the id parameter goes here
+      // For example, you can fetch data from a database based on the id
+      // and display the details of the item with that id
+    } else {
+      echo "Error: No id parameter provided.";
+      header("refresh:5;url=index.php");
+      echo "<div id='countdown'>Redirecting in: 5</div>";
+      echo "<script>
+        var count = 5;
+        var countdown = setInterval(function() {
+          count--;
+          document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
+          if (count === 0) {
+            clearInterval(countdown);
+          }
+        }, 1000);
+      </script>";
+      exit;
+    }
+    ?>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
@@ -59,16 +84,25 @@
 </nav>
 <section class="container mt-5">
     <div class="row">
-        <div class="col-md-6">
-            <img src="images/image.jpg" alt="Image" class="img-fluid">
-            <div id="image-gallery" class="mt-3">
-                <!-- Add your image gallery slider code here -->
-            </div>
+      <div class="col-md-6">
+        <div class="slider-container">
+          <?php echo getImagesPathById($conn, $id); ?>
         </div>
-        <div class="col-md-6">
-            <h2>Text</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id aliquam tincidunt, nisl nunc lacinia nunc, ac tincidunt nunc nunc nec nunc. Sed auctor, nunc id aliquam tincidunt, nisl nunc lacinia nunc, ac tincidunt nunc nunc nec nunc.</p>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <h2><?php echo getDetailsById($conn, $id, 'marka'); echo " "; echo getDetailsById($conn, $id, 'model'); ?></h2>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p><?php echo getDetailsById($conn, $id, 'opis'); ?></p>
+          </div>
+        </div>
+      </div>
     </div>
 </section>
+<script src="slider.js"></script>
+  </body>
 </html>

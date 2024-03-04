@@ -79,3 +79,73 @@ nav a{
     padding: 5rem;
   }
 }
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.slider-container-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slider-container-img.active {
+  opacity: 1;
+}
+
+.thumbnail-container {
+  margin-top: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  z-index:100;
+}
+
+.thumbnail {
+  display: inline-block !important;
+  z-index:100;
+  position: relative;
+  width: 50px;
+  margin: 0 5px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.thumbnail.active {
+  opacity: 1;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.slider-button:hover {
+  opacity: 1;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}

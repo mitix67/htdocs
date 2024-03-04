@@ -149,6 +149,7 @@
                 }
                 else {
                     generateAllCards($polaczenie);
+                    closeConnection($polaczenie);
                 }
             ?>
             </div>
