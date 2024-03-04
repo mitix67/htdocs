@@ -79,7 +79,10 @@ function generateCard($wynik)
         <div class="col-md-4 mt-3">
             <div class="card">
                 <img src="images/'.$wiersz["sciezka"].'" class="card-img-top" alt="image of a car">
-                <div class="card-body pb-2">
+                <div class="card-header pb-0">
+                    <h5 class="card-title">'.$wiersz["marka"].' '.$wiersz["model"].'</h5>
+                </div>
+                <div class="card-body pb-2 pt-2">
                     <div class="row">
                         <div class="col m-1 d-flex align-items-center p-10 border rounded" style="height: 40px; font-size: 13px; color: #6c757d;">
                             <svg class="mx-2" width="20" height="20" fill="none" viewBox="0 0 24 24">
