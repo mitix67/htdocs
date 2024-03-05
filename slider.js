@@ -60,7 +60,7 @@ sliderContainer.appendChild(thumbnailContainer);
 
 // Create the previous and next buttons
 const prevButton = document.createElement('button');
-prevButton.textContent = 'Previous';
+prevButton.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
 prevButton.classList.add('slider-button', 'prev-button');
 prevButton.addEventListener('click', () => {
     // Show the previous slide
@@ -77,7 +77,7 @@ prevButton.addEventListener('click', () => {
 
 
 const nextButton = document.createElement('button');
-nextButton.textContent = 'Next';
+nextButton.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
 nextButton.classList.add('slider-button', 'next-button');
 nextButton.addEventListener('click', () => {
     // Show the next slide
@@ -102,7 +102,7 @@ function startSlider() {
     sliderImages[currentSlide].classList.add('active');
     document.querySelectorAll('.thumbnail')[currentSlide].classList.add('active');
     // Set an interval to show the next slide
-    setInterval(showNextSlide, slideDuration);
+    const interval = setInterval(showNextSlide, slideDuration);
 }
 
 // Start the slider

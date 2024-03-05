@@ -186,4 +186,18 @@ function getImagesPathById($conn, $id) {
     }
 }
 
+function getPricesById($conn,$price, $id) {
+    $sql = "SELECT $price FROM cennik WHERE id='$id'";
+    $result = querySelect($conn, $sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row[$price];
+    } 
+    else {
+        return null;
+    }
+}
+
+
 ?>
