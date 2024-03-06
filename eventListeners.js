@@ -150,8 +150,17 @@ function getDateFromButton(event){
             event.style.color = 'white';
             event.setAttribute('data-date', endDate);
             document.getElementById('reservation-date-stop').value = formattedDate;
-            var divs = getDivsWithColorBetween(startDate, endDate);
-            setColorForDivsBetween(divs);
+
+            if (startDate.getMonth() != endDate.getMonth()) {
+                var divs = getDivsUntilEndDate(endDate);
+                console.log('chuj');
+                setColorForDivsBetween(divs);
+            }
+            else
+            {
+                var divs = getDivsWithColorBetween(startDate, endDate);
+                setColorForDivsBetween(divs);
+            }
             index = 0;
         }
         else
@@ -168,7 +177,7 @@ function setReservationOverlay(event) {
     document.getElementById('whole-body').style.backgroundColor = "gray";
     document.getElementById('reservation').style.opacity = 0.9;
     document.getElementById('whole-body').style.filter = "blur(10px)";
-    console.log('clicked');
+    console.log('overlay!');
 };
 
 function getDivsWithColorBetween(startDate, endDate) {
@@ -177,15 +186,12 @@ function getDivsWithColorBetween(startDate, endDate) {
     var pushDivs = false;
     divs.forEach((div) => {
         var color = div.style.color;
-        console.log(color);
 
         var date = new Date(div.getAttribute('data-date'));
-        console.log(date);
 
         if (color === 'white') {
             console.log(endDate);
-            var temp = new Date("1970-01-01T00:00:00.000Z");
-            console.log(date.toString() === endDate.toString());
+
             if (date.toString() === endDate.toString()) {
                 pushDivs = false;
             }
@@ -199,14 +205,21 @@ function getDivsWithColorBetween(startDate, endDate) {
         }
 
     });
-    console.log(result);
     return result;
 }
 
 function setColorForDivsBetween(divs) {
     divs.forEach((div) => {
-        div.style.backgroundColor = '#2c7aca';
-        div.style.color = 'white';
+
+        if (div.className == 'day_num ignore') {
+            div.style.backgroundColor = '#64affd';
+            div.style.color = 'white';
+        }
+        else{
+            div.style.backgroundColor = '#2c7aca';
+            div.style.color = 'white';
+        }
+
     });
 }
 
@@ -216,4 +229,24 @@ function clearColors() {
         div.style.backgroundColor = '';
         div.style.color = '';
     });
+}
+
+function getDivsUntilEndDate(endDate) {
+    var divs = document.querySelectorAll('.day_num');
+    var result = [];
+    var pushDivs = true;
+
+    divs.forEach((div) => {
+        var date = new Date(div.getAttribute('data-date'));
+
+        if (pushDivs) {
+            result.push(div);
+        }
+
+        if (date.toString() === endDate.toString()) {
+            pushDivs = false;
+        }
+    });
+    console.log(result);
+    return result;
 }
