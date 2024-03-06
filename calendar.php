@@ -16,6 +16,13 @@ class Calendar {
         $this->events[] = [$txt, $date, $days, $color];
     }
 
+    public function clear_events_by_index($index) {
+        if (isset($this->events[$index])) {
+            unset($this->events[$index]);
+        }
+    }
+
+
     public function __toString() {
         $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
         $num_days_last_month = date('j', strtotime('last day of previous month', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year)));
@@ -25,8 +32,7 @@ class Calendar {
         $html .= '<div class="header">';
         $html .= '<div class="month-year" id="month-year">';
         $html .= date('F Y', strtotime($this->active_year . '-' . $this->active_month . '-' . $this->active_day));
-        $html .= '<button class="btn btn-primary" id="calendar-btn-left">Left</button>';
-        $html .= '<button class="btn btn-primary" id="calendar-btn-right">Right</button>';
+        
         $html .= '</div>';
         $html .= '</div>';
         $html .= '<div class="days">';
@@ -49,7 +55,7 @@ class Calendar {
             if ($i == $this->active_day) {
                 $selected = ' selected';
             }
-            $html .= '<div class="day_num' . $selected . '">';
+            $html .= '<div onclick="getDateFromButton(this)" class="day_num' . $selected . '">';
             $html .= '<span>' . $i . '</span>';
             foreach ($this->events as $event) {
                 for ($d = 0; $d <= ($event[2]-1); $d++) {
@@ -75,4 +81,21 @@ class Calendar {
     }
 
 }
+
+
+$calendar = new Calendar(); 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Check if the "formattedDate" field is set in the POST request
+  if (isset($_POST["formattedDate"])) {
+      // Get the value from the "formattedDate" field
+      $date = $_POST["formattedDate"];
+      $calendar = new Calendar($date);
+      // Now you can use the $date variable in your script
+      echo $calendar;
+  } else {
+      echo $calendar;
+  }}
+
+
 ?>

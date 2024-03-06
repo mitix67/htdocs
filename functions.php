@@ -124,7 +124,7 @@ function generateCard($wynik)
                             <a href="details.php?id='.$wiersz["id"].'"><button class="btn btn-primary btn-block">Szczegóły</button></a>
                         </div>
                         <div class="col d-flex justify-content-end">
-                            <button class="btn btn-success btn-block">Rezerwuj</button>
+                            <button class="btn btn-success btn-block" onclick="setReservationOverlay(this)"">Rezerwuj</button>
                         </div>
                     </div>
                 </div>
