@@ -134,10 +134,12 @@ function getDateFromButton(event){
 
     if (index == 0)
     {
+        clearColors();
         startDate = dateJS;
         event.style.backgroundColor = '#2c7aca';
         event.style.color = 'white';
         document.getElementById('reservation-date-start').value = formattedDate;
+        event.setAttribute('data-date', startDate);
         index++;
     }
     else
@@ -146,7 +148,10 @@ function getDateFromButton(event){
         if (startDate < endDate) {
             event.style.backgroundColor = '#2c7aca';
             event.style.color = 'white';
+            event.setAttribute('data-date', endDate);
             document.getElementById('reservation-date-stop').value = formattedDate;
+            var divs = getDivsWithColorBetween(startDate, endDate);
+            setColorForDivsBetween(divs);
             index = 0;
         }
         else
@@ -165,3 +170,50 @@ function setReservationOverlay(event) {
     document.getElementById('whole-body').style.filter = "blur(10px)";
     console.log('clicked');
 };
+
+function getDivsWithColorBetween(startDate, endDate) {
+    var divs = document.querySelectorAll('.day_num');
+    var result = [];
+    var pushDivs = false;
+    divs.forEach((div) => {
+        var color = div.style.color;
+        console.log(color);
+
+        var date = new Date(div.getAttribute('data-date'));
+        console.log(date);
+
+        if (color === 'white') {
+            console.log(endDate);
+            var temp = new Date("1970-01-01T00:00:00.000Z");
+            console.log(date.toString() === endDate.toString());
+            if (date.toString() === endDate.toString()) {
+                pushDivs = false;
+            }
+
+            if (date.toString() === startDate.toString()) {
+                pushDivs = true;
+            }
+        }
+        if (pushDivs == true) {
+            result.push(div);
+        }
+
+    });
+    console.log(result);
+    return result;
+}
+
+function setColorForDivsBetween(divs) {
+    divs.forEach((div) => {
+        div.style.backgroundColor = '#2c7aca';
+        div.style.color = 'white';
+    });
+}
+
+function clearColors() {
+    var divs = document.querySelectorAll('.day_num');
+    divs.forEach((div) => {
+        div.style.backgroundColor = '';
+        div.style.color = '';
+    });
+}
