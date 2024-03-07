@@ -78,7 +78,7 @@ function generateCard($wynik)
         echo '
         <div class="col-md-4 mt-3">
             <div class="card">
-                <img src="images/'.$wiersz["sciezka"].'" class="card-img-top" alt="image of a car">
+                <img src="images/'.$wiersz["sciezka"].'" id="id='.$wiersz["id"].'" class="card-img-top" alt="image of a car">
                 <div class="card-header pb-0">
                     <h5 class="card-title">'.$wiersz["marka"].' '.$wiersz["model"].'</h5>
                 </div>
@@ -124,7 +124,7 @@ function generateCard($wynik)
                             <a href="details.php?id='.$wiersz["id"].'"><button class="btn btn-primary btn-block">Szczegóły</button></a>
                         </div>
                         <div class="col d-flex justify-content-end">
-                            <button class="btn btn-success btn-block" onclick="setReservationOverlay(this)"">Rezerwuj</button>
+                            <button class="btn btn-success btn-block" onclick="setReservationOverlay(this,'.$wiersz["id"].')"">Rezerwuj</button>
                         </div>
                     </div>
                 </div>
@@ -196,6 +196,30 @@ function getPricesById($conn,$price, $id) {
     } 
     else {
         return null;
+    }
+}
+
+function generateDivsForCarsInDatabase($conn) {
+    $sql = "SELECT * FROM samochody";
+    $result = querySelect($conn, $sql);
+
+    if ($result->num_rows > 0) {
+        while($wiersz = $result->fetch_assoc()) {
+            echo '
+            <div class="row mb-2">
+                <div class="col-6">
+                    <span>'.$wiersz['marka']." ".$wiersz['model'].'</span>
+                </div>
+                <div class="col-6">
+                    <a href=""><div class="btn btn-primary">Rezerwacje</div></a>
+                    <a href=""><div class="btn btn-danger">Usuń</div></a>
+                    <a href=""><div class="btn btn-primary">Edytuj</div></a>
+                </div>
+                
+                </div>
+            </div>
+            ';
+        }
     }
 }
 

@@ -171,12 +171,21 @@ function getDateFromButton(event){
 
 }
 
-function setReservationOverlay(event) {
+function setReservationOverlay(event, id) {
     document.getElementById('reservation').style.display = 'block';
     document.getElementById('whole-body').style.opacity = 0.5;
     document.getElementById('whole-body').style.backgroundColor = "gray";
     document.getElementById('reservation').style.opacity = 0.9;
     document.getElementById('whole-body').style.filter = "blur(10px)";
+
+    var img = document.getElementById('id=' + id).getAttribute('src');
+    var textToGen = '<img src="' + img + '" style="width: 50%; height: 50%; object-fit: cover;">';
+    console.log(textToGen);
+
+    var divToGenerate = '<div class="form-group d-none"><input type="number" class="form-control" id="id" name="id_samochodu" value="' + id + '"required> </div>'
+
+    document.getElementById('generate-id-here').innerHTML += textToGen;
+    document.getElementById('generate-id-here').innerHTML += divToGenerate;
     console.log('overlay!');
 };
 

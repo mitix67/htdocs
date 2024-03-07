@@ -58,6 +58,7 @@
     </nav>
     <div id="reservation">
         <div class = "container">
+        <form method="post" action="reservation.php">
             <div class="row">
                 <div class="col-6">
                 <button class="btn btn-primary" id="calendar-btn-left">Left</button>
@@ -65,28 +66,78 @@
                     <section id="calendar-container">
                     </section>
                 </div>
-                <div class="col-6">
-                    <form method="post" action="reservation.php">
+
+                <div class="col-3 card mt-3">
+                    <div class="card-header bg-white">
+                        <h3>Twoje dane</h3>
+                    </div>
+                    <div class = "card-body">
                         <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="Imie" name="name" required>
+                            <label for="name">Imię</label>
+                            <input type="text" class="form-control" id="imie" name="imie" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <label for="field1">Nazwisko</label>
+                            <input type="text" class="form-control" id="nazwisko" name="nazwisko" required>
                         </div>
                         <div class="form-group">
-                            <label for="reservation-date-start">Data rozpoczęcia:</label>
-                            <input type="date" class="form-control" id="reservation-date-start" name="date" required>
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="reservation-date-stop">Data zakończenia:</label>
-                            <input type="date" class="form-control" id="reservation-date-stop" name="date" required>
+                                <label for="field2">Numer telefonu</label>
+                                <input type="tel" class="form-control" id="tel" name="tel" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Make Reservation</button>
-                    </form>
+                        <div class="form-group">
+                                <label for="field3">Adres</label>
+                                <input type="text" class="form-control" id="adres" name="adres" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="field4">Kod pocztowy</label>
+                            <input type="text" class="form-control" pattern="[0-9]{5}" id="kod_pocztowy" name="kod_pocztowy" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="field5">Miasto</label>
+                            <input type="text" class="form-control" id="miasto" name="miasto" required>
+                        </div>
+                    </div>         
+                </div>
+                <div class="col-3 mt-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h3>Twoja rezerwacja</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="reservation-date-start">Data rozpoczęcia:</label>
+                                <input type="date" class="form-control" id="reservation-date-start" name="data_rozpoczecia" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reservation-date-stop">Data zakończenia:</label>
+                                <input type="date" class="form-control" id="reservation-date-stop" name="data_zakonczenia" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="field6">Numer prawa jazdy</label>
+                                <input type="number" class="form-control" id="idnumber" name="idnumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="field7">Liczba kierowców</label>
+                                <input type="number" class="form-control" id="driversCount" name="driversCount" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-header bg-white">
+                            <h3>Podsumowanie</h3>
+                        </div>
+                        <div class="card-body" id="generate-id-here">
+                            <p>Samochód</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Zrób rezerwacje</button>
+                    </div>   
                 </div>
             </div>
+            </form>
         </div>
     </div>
     <div id="whole-body">
