@@ -1,4 +1,5 @@
 <?php
+require_once 'functions.php';
 class Calendar {
     
     private $active_year, $active_month, $active_day;
@@ -21,7 +22,6 @@ class Calendar {
             unset($this->events[$index]);
         }
     }
-
 
     public function __toString() {
         $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
@@ -96,6 +96,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
       echo $calendar;
   }}
-
-
 ?>

@@ -70,7 +70,6 @@
     </div>
     <div class="container">
               <div class="row  justify-content-start">
-
                 <div class="col-lg-6 col-12">
                   <div class="container">
                     <div>
@@ -86,7 +85,12 @@
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
-                  <h3>Lista aut</h3>
+                  <div class="container">
+                    <div class="row d-flex justify-content-start align-items-center">
+                      <h3>Lista aut</h3>
+                      <a href="add-car.php"><button class="btn m-2 btn-primary">Dodaj auto</button></a><br>
+                    </div> 
+                  </div>
                   <div id="carsList-container">
                   <?php
                       require_once 'functions.php';
@@ -94,13 +98,11 @@
                       echo generateDivsForCarsInDatabase($conn);
                       closeConnection($conn);
                     ?>
-
                   </div>
-
-                  <a href="add-event.php"><button class="btn m-2 btn-primary">Add event</button></a><br>
-                  <a href="delete-event.php"><button class="btn m-2 btn-primary">Delete event</button></a><br>
-                  <a href="modify-event.php"><button class="btn m-2 btn-primary">Modify event</button></a><br>
                 </div>
+                  <a href="add-event.php"><button class="btn m-2 btn-primary">Add event</button></a><br>
+                  <a href="modify-event.php"><button class="btn m-2 btn-primary">Modify event</button></a><br>
+                  <a href="delete-event.php"><button class="btn m-2 btn-primary">Delete event</button></a><br>
               </div>
             </div>
 </section>

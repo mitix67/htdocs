@@ -150,7 +150,8 @@ function getDetailsById($conn, $id, $detail)
 
 
 //function to get path to 3 images, you must join them by 'id' tables: samochody and images
-function getImagesPathById($conn, $id) {
+function getImagesPathById($conn, $id) 
+{
     $sql = "SELECT * FROM images WHERE id='$id'";
     $result = querySelect($conn, $sql);
 
@@ -159,25 +160,19 @@ function getImagesPathById($conn, $id) {
     
     $directory = "images/".$brand."/".$model."/";
 
-    
     if ($result->num_rows > 0) {
         while($wiersz = $result -> fetch_assoc())
         {
-            $i = 1;
-            $number = 'image'.$i;
-            $image = $wiersz[$number];
-            if ($image == null) {
-                break;
-            }
-            else {
-                while ($i < 4)
-                {
-                    $number = 'image'.$i;
-                    $image = $wiersz[$number];
-                    echo '
-                    <img src="'.$directory.''.$image.'" alt="Image '.$i.'" class="slider-container-img">';
-                    $i++;
-                }
+            $path = $wiersz['imagesPath'];
+            $image = explode(";", $path);
+
+            $count = count($image);
+            $i = 0;
+            while($i < $count)
+            {
+                echo '
+                    <img src="'.$directory.''.$image[$i].'" alt="Image '.$i.'" class="slider-container-img">';
+                $i++;
             }
         }
     } 
@@ -187,7 +182,7 @@ function getImagesPathById($conn, $id) {
 }
 
 function getPricesById($conn,$price, $id) {
-    $sql = "SELECT $price FROM cennik WHERE id='$id'";
+    $sql = "SELECT $price FROM cennik WHERE id_samochodu='$id'";
     $result = querySelect($conn, $sql);
 
     if ($result->num_rows > 0) {
@@ -211,17 +206,31 @@ function generateDivsForCarsInDatabase($conn) {
                     <span>'.$wiersz['marka']." ".$wiersz['model'].'</span>
                 </div>
                 <div class="col-6">
-                    <a href=""><div class="btn btn-primary">Rezerwacje</div></a>
-                    <a href=""><div class="btn btn-danger">Usuń</div></a>
-                    <a href=""><div class="btn btn-primary">Edytuj</div></a>
-                </div>
-                
+                    <a href="display-reservation.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Rezerwacje</div></a>
+                    <a href="update-car.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Edytuj</div></a>
+                    <a href="delete-car-handler.php?id='.$wiersz["id"].'"><div class="btn btn-danger">Usuń</div></a>
                 </div>
             </div>
             ';
         }
     }
 }
+
+function getReservationById($conn, $id) {
+    $sql = "SELECT * FROM rezerwacje WHERE id='$id'";
+    $result = querySelect($conn, $sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $reservationData = $row['reservation_data'];
+        // Process the reservation data here
+        // ...
+        return $reservationData;
+    } else {
+        return null;
+    }
+}
+
 
 
 ?>

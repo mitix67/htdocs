@@ -259,3 +259,14 @@ function getDivsUntilEndDate(endDate) {
     console.log(result);
     return result;
 }
+
+if (document.getElementById('form-add-image-file-field') != null) {
+    document.getElementById('form-add-image-file-field').addEventListener('click', function() {
+        var container = document.getElementById('form-add-image-file-container');
+        var input = '<input type="file" class="form-control" id="imagesPath" name="imagesPath[]">';
+
+        console.log('chuj');
+        container.innerHTML += input;
+
+    });
+}
