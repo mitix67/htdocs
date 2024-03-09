@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = connectToDatabase();
 
-    $baseQuery = "images/";
+    $baseQuery = "";
     $firstImage = "images/";
     // Handle the array of files
     $fileCount = count($imagesPath['name']);
@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if($i == 0)
         {
             $firstImage = $firstImage.$fileName;
+            $baseQuery = $firstImage.";";
             move_uploaded_file($fileTmpName, $firstImage);
         }
         else{
@@ -58,12 +59,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 echo "Failed to upload file";
             }
-    
-            $baseQuery = $baseQuery.$uploadedFilePath.";";
+            if($i == 1)
+            {
+                $baseQuery = $baseQuery.$uploadedFilePath;
+            }
+            else
+            {
+                $baseQuery = $baseQuery.";".$uploadedFilePath;
+            }
         }
     }
 
-    
+    echo $baseQuery;
     
     $query = "INSERT INTO samochody (marka, model, opis, sciezka, cena, rok_produkcji, naped, km, historia, skrzynia, czas) VALUES ('$marka', '$model', '$opis', '$firstImage', '$cena', '$rok_produkcji', '$naped', '$km', '$historia', '$skrzynia', '$czas')";
     $result = querySelect($conn, $query);

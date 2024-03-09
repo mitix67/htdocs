@@ -73,11 +73,11 @@
                     </div>
                     <div class = "card-body">
                         <div class="form-group">
-                            <label for="name">Imię</label>
+                            <label for="imie">Imię</label>
                             <input type="text" class="form-control" id="imie" name="imie" required>
                         </div>
                         <div class="form-group">
-                            <label for="field1">Nazwisko</label>
+                            <label for="nazwisko">Nazwisko</label>
                             <input type="text" class="form-control" id="nazwisko" name="nazwisko" required>
                         </div>
                         <div class="form-group">

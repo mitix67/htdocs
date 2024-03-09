@@ -74,11 +74,12 @@
                   <div class="container">
                     <div>
                       <h3>Rezerwacje</h3>
-                      <div id="calendar-container">
+                      <div id="container">
                         <?php
                           require_once 'calendar.php';
-                          $calendar = new Calendar();
-                          echo $calendar;
+                          $conn = connectToDatabase();
+
+                          generateDivsForReservationsInDatabase($conn);
                         ?>
                       </div>
                     </div>
@@ -96,15 +97,32 @@
                       require_once 'functions.php';
                       $conn = connectToDatabase();
                       echo generateDivsForCarsInDatabase($conn);
-                      closeConnection($conn);
                     ?>
                   </div>
                 </div>
-                  <a href="add-event.php"><button class="btn m-2 btn-primary">Add event</button></a><br>
-                  <a href="modify-event.php"><button class="btn m-2 btn-primary">Modify event</button></a><br>
-                  <a href="delete-event.php"><button class="btn m-2 btn-primary">Delete event</button></a><br>
               </div>
             </div>
+            <div id="calendar-container">
+              <?php
+                $reservations = querySelect($conn, "SELECT * FROM rezerwacje");
+                      
+                $calendar = new Calendar();
+
+                while ($row = $reservations->fetch_assoc()) 
+                {
+                  $startDate = new DateTime($row['data_rozpoczecia']);
+                  $endDate = new DateTime($row['data_zakonczenia']);
+                  $diff = $endDate->diff($startDate)->days;
+      
+                  $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
+                  $model = getDetailsById($conn, $row['id_samochodu'], 'model');
+      
+                  $combined = $brand . " " . $model;
+      
+                  $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, 'red');
+                }
+                echo $calendar;
+              ?>
 </section>
 
 

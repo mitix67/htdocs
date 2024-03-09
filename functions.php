@@ -78,7 +78,7 @@ function generateCard($wynik)
         echo '
         <div class="col-md-4 mt-3">
             <div class="card">
-                <img src="images/'.$wiersz["sciezka"].'" id="id='.$wiersz["id"].'" class="card-img-top" alt="image of a car">
+                <img src="'.$wiersz["sciezka"].'" id="id='.$wiersz["id"].'" class="card-img-top" alt="image of a car">
                 <div class="card-header pb-0">
                     <h5 class="card-title">'.$wiersz["marka"].' '.$wiersz["model"].'</h5>
                 </div>
@@ -152,13 +152,13 @@ function getDetailsById($conn, $id, $detail)
 //function to get path to 3 images, you must join them by 'id' tables: samochody and images
 function getImagesPathById($conn, $id) 
 {
-    $sql = "SELECT * FROM images WHERE id='$id'";
+    $sql = "SELECT * FROM images WHERE id_samochodu='$id'";
     $result = querySelect($conn, $sql);
 
     $brand = getDetailsById($conn, $id, 'marka');
     $model = getDetailsById($conn, $id, 'model');
     
-    $directory = "images/".$brand."/".$model."/";
+    //$directory = "images/".$brand."/".$model."/";
 
     if ($result->num_rows > 0) {
         while($wiersz = $result -> fetch_assoc())
@@ -171,7 +171,7 @@ function getImagesPathById($conn, $id)
             while($i < $count)
             {
                 echo '
-                    <img src="'.$directory.''.$image[$i].'" alt="Image '.$i.'" class="slider-container-img">';
+                    <img src="'.$image[$i].'" alt="Image '.$i.'" class="slider-container-img">';
                 $i++;
             }
         }
@@ -209,6 +209,27 @@ function generateDivsForCarsInDatabase($conn) {
                     <a href="display-reservation.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Rezerwacje</div></a>
                     <a href="update-car.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Edytuj</div></a>
                     <a href="delete-car-handler.php?id='.$wiersz["id"].'"><div class="btn btn-danger">Usuń</div></a>
+                </div>
+            </div>
+            ';
+        }
+    }
+}
+
+function generateDivsForReservationsInDatabase($conn) {
+    $sql = "SELECT * FROM rezerwacje";
+    $result = querySelect($conn, $sql);
+
+    if ($result->num_rows > 0) {
+        while($wiersz = $result->fetch_assoc()) {
+            echo '
+            <div class="row mb-2">
+                <div class="col-6">
+                    <span>'.$wiersz['data_rozpoczecia']." ".$wiersz['data_zakonczenia'].'</span>
+                </div>
+                <div class="col-6 justify-content-end">
+                    <a href="update-reservation.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Edytuj</div></a>
+                    <a href="delete-reservation-handler.php?id='.$wiersz["id"].'"><div class="btn btn-danger">Usuń</div></a>
                 </div>
             </div>
             ';
