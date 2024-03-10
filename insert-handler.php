@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $uploadedFilePath = $uploadDirectory . $fileName;
 
             if (!file_exists($uploadDirectory)) {
+                $uploadDirectory = rawurlencode($uploadDirectory);
                 mkdir($uploadDirectory, 0755, true);
             }
 
@@ -71,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     echo $baseQuery;
-    
+    $baseQuery = rawurlencode($baseQuery);
     $query = "INSERT INTO samochody (marka, model, opis, sciezka, cena, rok_produkcji, naped, km, historia, skrzynia, czas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "sssssssssss", $marka, $model, $opis, $firstImage, $cena, $rok_produkcji, $naped, $km, $historia, $skrzynia, $czas);

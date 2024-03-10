@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="pl-pl">
 <head>
     <title>Add Car</title>
     <!-- Include Bootstrap CSS -->

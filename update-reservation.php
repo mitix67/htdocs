@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
     <head>
+      <title>Update Reservation</title>
         <link rel="stylesheet" href="calendar.css?v=<?php echo time() ?>">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -42,52 +43,52 @@ if (isset($_GET['id']))
                 echo "<h2>Aktualne wartości</h2>";
 
                 echo "<form method='POST' action='update-car.php'>";
-                echo "<input type='hidden' name='id' value='" . $_GET['id'] . "'>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='imie'>Imię:</label>";
-                echo "<input type='text' name='imie' id='imie' value='" . $rezerwacje_dane['imie'] . "' readonly required class='form-control'>";
+                echo "<input type='text' value='" . $rezerwacje_dane['imie'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='nazwisko'>Nazwisko:</label>";
-                echo "<input type='text' name='nazwisko' id='nazwisko' value='" . $rezerwacje_dane['nazwisko'] . "' readonly required class='form-control'>";
+                echo "<input type='text' value='" . $rezerwacje_dane['nazwisko'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='tel'>Telefon:</label>";
-                echo "<input type='tel' name='tel' id='tel' value='" . $rezerwacje_dane['tel'] . "' readonly required class='form-control'>";
+                echo "<input type='tel' value='" . $rezerwacje_dane['tel'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='email'>Email:</label>";
-                echo "<input type='email' name='email' id='email' value='" . $rezerwacje_dane['email'] . "' readonly required class='form-control'>";
+                echo "<input type='email' value='" . $rezerwacje_dane['email'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='adres'>Adres:</label>";
-                echo "<input type='text' name='adres' id='adres' value='" . $rezerwacje_dane['adres'] . "' readonly required class='form-control'>";
+                echo "<input type='text' value='" . $rezerwacje_dane['adres'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='kod_pocztowy'>Kod pocztowy:</label>";
-                echo "<input type='text' name='kod_pocztowy' id='kod_pocztowy' value='" . $rezerwacje_dane['kod_pocztowy'] . "' readonly required class='form-control'>";
+                echo "<input type='text' value='" . $rezerwacje_dane['kod_pocztowy'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='miasto'>Miasto:</label>";
-                echo "<input type='text' name='miasto' id='miasto' value='" . $rezerwacje_dane['miasto'] . "' readonly required class='form-control'>";
+                echo "<input type='text' value='" . $rezerwacje_dane['miasto'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='data_rozpoczecia'>Data rozpoczęcia:</label>";
-                echo "<input type='date' name='data_rozpoczecia' id='data_rozpoczecia' value='" . $rezerwacje['data_rozpoczecia'] . "' readonly required class='form-control'>";
+                echo "<input type='date' value='" . $rezerwacje['data_rozpoczecia'] . "' readonly required class='form-control'>";
                 echo "</div>";
 
                 echo "<div class='form-group'>";
                 echo "<label for='data_zakonczenia'>Data zakończenia:</label>";
-                echo "<input type='date' name='data_zakonczenia' id='data_zakonczenia' value='" . $rezerwacje['data_zakonczenia'] . "' readonly required class='form-control'>";
+                echo "<input type='date' value='" . $rezerwacje['data_zakonczenia'] . "' readonly required class='form-control'>";
                 echo "</div>";
+
                 echo "</form>";
                 echo "</div>";
 

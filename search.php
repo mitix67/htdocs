@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Carrllix</title>
-    <link rel="icon" type="image/x-icon" href="images/logo.png" />
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="styl.css?v=<?php echo time() ?>" rel="stylesheet" />
-    <link href="calendar.css?v=<?php echo time() ?>" rel="stylesheet" />
+    <link href="styl.css?v=<?php echo time() ?>" rel="stylesheet">
+    <link href="calendar.css?v=<?php echo time() ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
@@ -63,8 +63,8 @@
                 <div class="col-lg-6 col-md-12">
                 <button class="btn btn-primary" id="calendar-btn-left">Left</button>
                 <button class="btn btn-primary" id="calendar-btn-right">Right</button>
-                    <section id="calendar-container">
-                    </section>
+                    <div id="calendar-container">
+                    </div>
                 </div>
 
                 <div class="col-lg-3 col-md-12 card mt-3">
@@ -85,19 +85,19 @@
                                 <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                                <label for="field2">Numer telefonu</label>
+                                <label for="tel">Numer telefonu</label>
                                 <input type="tel" class="form-control" id="tel" name="tel" required>
                         </div>
                         <div class="form-group">
-                                <label for="field3">Adres</label>
+                                <label for="adres">Adres</label>
                                 <input type="text" class="form-control" id="adres" name="adres" required>
                         </div>
                         <div class="form-group">
-                            <label for="field4">Kod pocztowy</label>
+                            <label for="kod_pocztowy">Kod pocztowy</label>
                             <input type="text" class="form-control" pattern="[0-9]{5}" id="kod_pocztowy" name="kod_pocztowy" required>
                         </div>
-                        <div class="form-group">
-                            <label for="field5">Miasto</label>
+                        <div class="form-miasto">
+                            <label for="miasto">Miasto</label>
                             <input type="text" class="form-control" id="miasto" name="miasto" required>
                         </div>
                     </div>         
@@ -117,11 +117,11 @@
                                 <input type="date" class="form-control" id="reservation-date-stop" name="data_zakonczenia" required>
                             </div>
                             <div class="form-group">
-                                <label for="field6">Numer prawa jazdy</label>
+                                <label for="idnumber">Numer prawa jazdy</label>
                                 <input type="number" class="form-control" id="idnumber" name="idnumber" required>
                             </div>
                             <div class="form-group">
-                                <label for="field7">Liczba kierowców</label>
+                                <label for="driversCount">Liczba kierowców</label>
                                 <input type="number" class="form-control" id="driversCount" name="driversCount" required>
                             </div>
                         </div>
@@ -167,6 +167,7 @@
                                     <select class="form-control" name="model" id="model" required="required" data-validation-required-message="Wybierz model.">
                                             <?php 
                                                 require_once 'functions.php';
+                                                $brand = "";
                                                 echo generateSelectFromModel(connectToDatabase(), $brand);
                                             ?>
                                         </select>
@@ -177,6 +178,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <select class="form-control" name="skrzynia" id="skrzynia" required="required" data-validation-required-message="Wybierz skrzynię samochodu.">
+                                            <option value="" disabled selected hidden>Wybierz skrzynię samochodu</option>
                                             <option value="Manualna">Manualna</option>
                                             <option value="Automatyczna">Automatyczna</option>
                                         </select>
@@ -248,8 +250,7 @@
                 ?>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
     <script src="eventListeners.js?v=<?php echo time() ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

@@ -46,6 +46,9 @@ function generateSelectFromBrand($conn) {
     $select = "<option value=''>Wybierz markę</option>";
     foreach ($result as $row) {
         $brand = $row['marka'];
+        if ($brand == null)
+            return null;
+
         $select .= "<option value='$brand'>$brand</option>";
     }
 
@@ -60,6 +63,7 @@ function generateSelectFromModel($conn, $brand) {
     $result = $stmt->get_result();
 
     $select = "<option value=''>Wybierz model</option>";
+    
     foreach ($result as $row) {
         $model = $row['model'];
         $select .= "<option value='$model'>$model</option>";
@@ -101,15 +105,26 @@ function generateCard($wynik)
                 <div class="card-body pb-2 pt-2">
                     <div class="row">
                         <div class="col m-1 d-flex align-items-center p-10 border rounded" style="height: 40px; font-size: 13px; color: #6c757d;">
-                            <svg class="mx-2" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                                <path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#12192C" stroke-width="1.5"></path><path d="M19 19L17.5 17.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M19 5L17.5 6.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M5 19L6.5 17.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M5 5L6.5 6.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M2 12H4" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M19.9998 12L21.9998 12" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M12 4.00021L12 2.00021" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M10.1212 14.3639C8.94966 13.1923 8.94966 11.2928 10.1212 10.1212C11.2928 8.94966 13.1923 8.94966 14.3639 10.1212C14.8095 10.5669 15.1208 11.492 15.3354 12.4673C15.6563 13.9259 15.8167 14.6551 15.2359 15.2359C14.6551 15.8167 13.9259 15.6563 12.4673 15.3354C11.492 15.1208 10.5669 14.8095 10.1212 14.3639Z" stroke="#12192C" stroke-width="1.5"></path>
-                            </svg>
+                        <svg class="mx-2" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                            <path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#12192C" stroke-width="1.5"></path>
+                            <path d="M19 19L17.5 17.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M19 5L17.5 6.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M5 19L6.5 17.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M5 5L6.5 6.5" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M2 12H4" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M19.9998 12L21.9998 12" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M12 4.00021L12 2.00021" opacity="0.5" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M10.1212 14.3639C8.94966 13.1923 8.94966 11.2928 10.1212 10.1212C11.2928 8.94966 13.1923 8.94966 14.3639 10.1212C14.8095 10.5669 15.1208 11.492 15.3354 12.4673C15.6563 13.9259 15.8167 14.6551 15.2359 15.2359C14.6551 15.8167 13.9259 15.6563 12.4673 15.3354C11.492 15.1208 10.5669 14.8095 10.1212 14.3639Z" stroke="#12192C" stroke-width="1.5"></path>
+                        </svg>
                         '.$wiersz["czas"].' do 100 km/h
                         </div>
                         <div class="col m-1 d-flex align-items-center p-2 border rounded" style="height: 40px; font-size: 13px; color: #6c757d;">
-                            <svg class="mx-2" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                                <path d="M8 9V15" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M12 9V15" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><path d="M8 12H13C13.9319 12 14.3978 12 14.7654 11.8478C15.2554 11.6448 15.6448 11.2554 15.8478 10.7654C16 10.3978 16 9.93188 16 9" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path><rect height="20" opacity="0.5" rx="5" stroke="#12192C" stroke-width="1.5" width="20" x="2" y="2"></rect></svg>
-                            </svg>
+                        <svg class="mx-2" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                            <path d="M8 9V15" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M12 9V15" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <path d="M8 12H13C13.9319 12 14.3978 12 14.7654 11.8478C15.2554 11.6448 15.6448 11.2554 15.8478 10.7654C16 10.3978 16 9.93188 16 9" stroke="#12192C" stroke-linecap="round" stroke-width="1.5"></path>
+                            <rect height="20" opacity="0.5" rx="5" stroke="#12192C" stroke-width="1.5" width="20" x="2" y="2"></rect>
+                        </svg>
                         '.$wiersz["skrzynia"].'
                         </div>
                     </div>
@@ -137,10 +152,10 @@ function generateCard($wynik)
                     </div>
                     <div class="row mt-2">
                         <div class="col">
-                            <a href="details.php?id='.$wiersz["id"].'"><button class="btn btn-primary btn-block">Szczegóły</button></a>
+                            <a href="details.php?id='.$wiersz["id"].'"><div class="btn btn-primary btn-block">Szczegóły</div></a>
                         </div>
                         <div class="col d-flex justify-content-end">
-                            <button class="btn btn-success btn-block" onclick="setReservationOverlay(this,'.$wiersz["id"].')"">Rezerwuj</button>
+                            <button class="btn btn-success btn-block" onclick="setReservationOverlay(this,'.$wiersz["id"].')">Rezerwuj</button>
                         </div>
                     </div>
                 </div>
@@ -180,7 +195,8 @@ function getImagesPathById($conn, $id)
         while($wiersz = $result -> fetch_assoc())
         {
             $path = $wiersz['imagesPath'];
-            $image = explode(";", $path);
+            $path = str_replace("%2F", "/", $path);
+            $image = explode("%3B", $path);
 
             $count = count($image);
             $i = 0;
