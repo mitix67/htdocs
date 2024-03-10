@@ -72,17 +72,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo $baseQuery;
     
-    $query = "INSERT INTO samochody (marka, model, opis, sciezka, cena, rok_produkcji, naped, km, historia, skrzynia, czas) VALUES ('$marka', '$model', '$opis', '$firstImage', '$cena', '$rok_produkcji', '$naped', '$km', '$historia', '$skrzynia', '$czas')";
-    $result = querySelect($conn, $query);
+    $query = "INSERT INTO samochody (marka, model, opis, sciezka, cena, rok_produkcji, naped, km, historia, skrzynia, czas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "sssssssssss", $marka, $model, $opis, $firstImage, $cena, $rok_produkcji, $naped, $km, $historia, $skrzynia, $czas);
+    $result = mysqli_stmt_execute($stmt);
 
     $id = mysqli_insert_id($conn);
 
-    $query2 = "INSERT INTO images (imagesPath, id_samochodu) VALUES ('$baseQuery', '$id')";
-    $result2 = querySelect($conn, $query2);
+    $query2 = "INSERT INTO images (imagesPath, id_samochodu) VALUES (?, ?)";
+    $stmt2 = mysqli_prepare($conn, $query2);
+    mysqli_stmt_bind_param($stmt2, "si", $baseQuery, $id);
+    $result2 = mysqli_stmt_execute($stmt2);
 
-    $query3 = "INSERT INTO cennik (dobatyk, dobawek, weekend, tydzien, miesiac, id_samochodu) VALUES ('$dobatyk', '$dobawek', '$weekend', '$tydzien', '$miesiac', '$id')";
-    $result3 = querySelect($conn, $query3);
-    
+    $query3 = "INSERT INTO cennik (dobatyk, dobawek, weekend, tydzien, miesiac, id_samochodu) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt3 = mysqli_prepare($conn, $query3);
+    mysqli_stmt_bind_param($stmt3, "sssssi", $dobatyk, $dobawek, $weekend, $tydzien, $miesiac, $id);
+    $result3 = mysqli_stmt_execute($stmt3);
+
     if ($result && $result2 && $result3) {
         echo "Car added successfully";
     } else {

@@ -22,11 +22,18 @@ if (isset($_GET['id']))
     while ($row = $samochodys->fetch_assoc()) {
         if ($row['id'] == $_GET['id'])
             {
-                // Retrieve values from the database
                 $id = $_GET['id'];
                 $conn = connectToDatabase();
-                $rezerwacje = querySelect($conn, "SELECT * FROM rezerwacje WHERE id = $id")->fetch_assoc();
-                $rezerwacje_dane = querySelect($conn, "SELECT * FROM rezerwacje_dane WHERE id = $id")->fetch_assoc();
+
+                $stmt = $conn->prepare("SELECT * FROM rezerwacje WHERE id = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $rezerwacje = $stmt->get_result()->fetch_assoc();
+
+                $stmt = $conn->prepare("SELECT * FROM rezerwacje_dane WHERE id = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $rezerwacje_dane = $stmt->get_result()->fetch_assoc();
 
                 // Generate form fields with values
                 echo "<section class='container'>";
@@ -141,9 +148,6 @@ if (isset($_GET['id']))
                 echo "</div>";
                 echo "</section>";
 
-                // heres 'cennik' table
-
-
         }
     }
 
@@ -163,15 +167,20 @@ else if (isset($_POST['submit'])) {
     $data_rozpoczecia = $_POST['data_rozpoczecia'];
     $data_zakonczenia = $_POST['data_zakonczenia'];
 
-
     // Update the values in the database
     $conn = connectToDatabase();
 
-    $query = "UPDATE rezerwacje_dane SET imie = '$imie', nazwisko = '$nazwisko', tel = '$tel', email = '$email', adres = '$adres', kod_pocztowy = '$kod_pocztowy', miasto = '$miasto' WHERE id = $id";
-    $query2 = "UPDATE rezerwacje SET data_rozpoczecia = '$data_rozpoczecia', data_zakonczenia = '$data_zakonczenia' WHERE id = $id";
+    $query = "UPDATE rezerwacje_dane SET imie = ?, nazwisko = ?, tel = ?, email = ?, adres = ?, kod_pocztowy = ?, miasto = ? WHERE id = ?";
+    $query2 = "UPDATE rezerwacje SET data_rozpoczecia = ?, data_zakonczenia = ? WHERE id = ?";
 
-    $result = querySelect($conn, $query);
-    $resul2 = querySelect($conn, $query2);
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sssssssi", $imie, $nazwisko, $tel, $email, $adres, $kod_pocztowy, $miasto, $id);
+    $result = $stmt->execute();
+
+    $stmt2 = $conn->prepare($query2);
+    $stmt2->bind_param("ssi", $data_rozpoczecia, $data_zakonczenia, $id);
+    $result2 = $stmt2->execute();
+
     closeConnection($conn);
 
     if ($result && $resul2) {

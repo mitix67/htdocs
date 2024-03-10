@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if (isset($_SESSION['user_id'])) {
+        header("location: admin-panel.php");
+    }
+    ?>
 <!doctype html>
 <html lang="pl">
     <head>
@@ -20,23 +26,22 @@
                 <!-- Your navigation code here -->
             </div>
         </nav>
-
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Login</h5>
+                            <h5 class="card-title">Logowanie</h5>
                             <form method="post" action="process_login.php">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
+                                    <label for="username">Nazwa użytkownika</label>
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="Wpisz nazwę użytkownika">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+                                    <label for="password">Hasło</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Wpisz hasło">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Zaloguj się</button>
                                 <?php
                                     if (isset($_GET['error'])) {
                                         

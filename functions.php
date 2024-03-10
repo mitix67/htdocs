@@ -34,12 +34,14 @@ function generateAllCards($conn) {
     $sql = "SELECT * FROM samochody";
     $result = querySelect($conn, $sql);
 
-    generateCard($result);
+    return generateCard($result);
 }
 
 function generateSelectFromBrand($conn) {
     $sql = "SELECT marka FROM samochody GROUP BY marka ORDER BY marka ASC";
-    $result = querySelect($conn, $sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $select = "<option value=''>Wybierz markę</option>";
     foreach ($result as $row) {
@@ -51,8 +53,11 @@ function generateSelectFromBrand($conn) {
 }
 
 function generateSelectFromModel($conn, $brand) {
-    $sql = "SELECT model FROM samochody WHERE marka='$brand' GROUP BY model ORDER BY model ASC";
-    $result = querySelect($conn, $sql);
+    $sql = "SELECT model FROM samochody WHERE marka=? GROUP BY model ORDER BY model ASC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $brand);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $select = "<option value=''>Wybierz model</option>";
     foreach ($result as $row) {
@@ -64,13 +69,24 @@ function generateSelectFromModel($conn, $brand) {
 }
 
 // Handler for functions.php?brand
+
 if (isset($_GET['brand'])) {
     $conn = connectToDatabase();
     $brand = $_GET['brand'];
-    $selectFromModel = generateSelectFromModel($conn, $brand);
-    closeConnection($conn);
-    echo $selectFromModel;
+
+    if ($brand == 0)
+    {   
+        $conn = connectToDatabase();
+        echo generateAllCards($conn);
+        closeConnection($conn);
+    }   
+    else{
+        $selectFromModel = generateSelectFromModel($conn, $brand);
+        closeConnection($conn);
+        echo $selectFromModel;
+    }
 }
+
 
 function generateCard($wynik) 
 {

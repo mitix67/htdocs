@@ -60,14 +60,14 @@
         <div class = "container">
         <form method="post" action="reservation.php">
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-md-12">
                 <button class="btn btn-primary" id="calendar-btn-left">Left</button>
                 <button class="btn btn-primary" id="calendar-btn-right">Right</button>
                     <section id="calendar-container">
                     </section>
                 </div>
 
-                <div class="col-3 card mt-3">
+                <div class="col-lg-3 col-md-12 card mt-3">
                     <div class="card-header bg-white">
                         <h3>Twoje dane</h3>
                     </div>
@@ -102,7 +102,7 @@
                         </div>
                     </div>         
                 </div>
-                <div class="col-3 mt-3">
+                <div class="col-lg-3 col-md-12 mt-3">
                     <div class="card">
                         <div class="card-header bg-white">
                             <h3>Twoja rezerwacja</h3>
@@ -196,6 +196,7 @@
                                 <div class="col-lg-12 text-center">
                                     <div id="success"></div>
                                     <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Wyślij</button>
+                                    <button id="sendMessageButton2" class="btn btn-primary btn-xl text-uppercase" type="button">Czyść</button>
                                 </div>
                             </div>
                         </form>
@@ -211,32 +212,39 @@
                 require_once 'functions.php';
                 $polaczenie = connectToDatabase();
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    @$brand = $_POST['brand'];
+                    @$model = $_POST['model'];
+                    @$skrzynia = $_POST['skrzynia'];
+                    @$naped = $_POST['naped'];
 
-                        @$brand = $_POST['brand'];
-                        @$model = $_POST['model'];
-                        @$skrzynia = $_POST['skrzynia'];
-                        @$naped = $_POST['naped'];
-
-                        if ($naped == "NULL") {
-                            $sql = "SELECT * FROM samochody WHERE marka='$brand' AND model='$model' AND skrzynia='$skrzynia'";
-                        }
-                        else {
-                            $sql = "SELECT * FROM samochody WHERE marka='$brand' AND model='$model' AND naped='$naped' AND skrzynia='$skrzynia'";
-                        }
-
-                        $result = querySelect($polaczenie, $sql);
-                        $wynik = $polaczenie ->query($sql);
-
-                        if($wynik ->num_rows > 0){
-                            generateCard($wynik);
-                        }
-                        $polaczenie ->close();
+                    if ($naped == "NULL") {
+                        $sql = "SELECT * FROM samochody WHERE marka=? AND model=? AND skrzynia=?";
+                        $stmt = $polaczenie->prepare($sql);
+                        $stmt->bind_param("sss", $brand, $model, $skrzynia);
+                    } else {
+                        $sql = "SELECT * FROM samochody WHERE marka=? AND model=? AND naped=? AND skrzynia=?";
+                        $stmt = $polaczenie->prepare($sql);
+                        $stmt->bind_param("ssss", $brand, $model, $naped, $skrzynia);
                     }
-                    else {
+
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        generateCard($result);
+                    }
+                    $stmt->close();
+
+                    if ($result->num_rows == 0) {
                         generateAllCards($polaczenie);
-                        closeConnection($polaczenie);
                     }
+
+                    closeConnection($polaczenie);
+                } else {
+                    generateAllCards($polaczenie);
+                    closeConnection($polaczenie);
+                }
                 ?>
                 </div>
             </div>

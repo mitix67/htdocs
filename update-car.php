@@ -16,7 +16,9 @@ if (isset($_GET['id']))
 {
     $conn = connectToDatabase();
 
-    $samochodys = querySelect($conn, "SELECT * FROM samochody");
+    $stmt = $conn->prepare("SELECT * FROM samochody");
+    $stmt->execute();
+    $samochodys = $stmt->get_result();
 
 
     while ($row = $samochodys->fetch_assoc()) {
@@ -25,8 +27,17 @@ if (isset($_GET['id']))
                 // Retrieve values from the database
                 $id = $_GET['id'];
                 $conn = connectToDatabase();
-                $samochody = querySelect($conn, "SELECT * FROM samochody WHERE id = $id")->fetch_assoc();
-                $cennik = querySelect($conn, "SELECT * FROM cennik WHERE id_samochodu = $id")->fetch_assoc();
+                $id = $_GET['id'];
+
+                $stmt = $conn->prepare("SELECT * FROM samochody WHERE id = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $samochody = $stmt->get_result()->fetch_assoc();
+
+                $stmt = $conn->prepare("SELECT * FROM cennik WHERE id_samochodu = ?");
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $cennik = $stmt->get_result()->fetch_assoc();
 
                 // Generate form fields with values
                 echo "<section class='container'>";
@@ -214,17 +225,13 @@ if (isset($_GET['id']))
                 echo "</form>";
                 echo "</section>";
                 echo "</div>";
-
-                // heres 'cennik' table
-
-
         }
     }
 
     closeConnection($conn);
 }
 else if (isset($_POST['submit'])) {
-    // Retrieve values from the form
+
     $id = $_POST['id'];
     $marka = $_POST['marka'];
     $model = $_POST['model'];
@@ -243,14 +250,18 @@ else if (isset($_POST['submit'])) {
     $tydzien = $_POST['tydzien'];
     $miesiac = $_POST['miesiac'];
 
-    // Update the values in the database
     $conn = connectToDatabase();
-    $query = "UPDATE samochody SET marka='$marka', model='$model', opis='$opis', sciezka='$sciezka', cena='$cena', rok_produkcji='$rok_produkcji', naped='$naped', km='$km', historia='$historia', skrzynia='$skrzynia', czas='$czas' WHERE id=$id";
-    $query2 = "UPDATE cennik SET dobatyk='$dobatyk', dobawek='$dobawek', weekend='$weekend', tydzien='$tydzien', miesiac='$miesiac' WHERE id_samochodu=$id";
-    $result = querySelect($conn, $query);
-    $resul2 = querySelect($conn, $query2);
-    closeConnection($conn);
-
+    $query = "UPDATE samochody SET marka=?, model=?, opis=?, sciezka=?, cena=?, rok_produkcji=?, naped=?, km=?, historia=?, skrzynia=?, czas=? WHERE id=?";
+    $query2 = "UPDATE cennik SET dobatyk=?, dobawek=?, weekend=?, tydzien=?, miesiac=? WHERE id_samochodu=?";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sssssssssssi", $marka, $model, $opis, $sciezka, $cena, $rok_produkcji, $naped, $km, $historia, $skrzynia, $czas, $id);
+    $result = $stmt->execute();
+    
+    $stmt2 = $conn->prepare($query2);
+    $stmt2->bind_param("sssssi", $dobatyk, $dobawek, $weekend, $tydzien, $miesiac, $id);
+    $resul2 = $stmt2->execute();
+    
     if ($result && $resul2) {
         echo "Values updated successfully.";
         header("refresh:5;url=admin-panel.php");
@@ -269,6 +280,8 @@ else if (isset($_POST['submit'])) {
     } else {
         echo "Error updating values.";
     }
+    
+    closeConnection($conn);
 }
 else
 {

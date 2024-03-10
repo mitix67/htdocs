@@ -1,3 +1,23 @@
+<?php session_start(); 
+
+if (!isset($_SESSION['user_id'])) {
+  echo "Error: You dont have acces to this site.";
+  header("refresh:5;url=index.php");
+  echo "<div id='countdown'>Redirecting in: 5</div>";
+  echo "<script>
+      var count = 5;
+      var countdown = setInterval(function() {
+        count--;
+        document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
+        if (count === 0) {
+          clearInterval(countdown);
+        }
+      }, 1000);
+    </script>";
+  exit;
+}
+
+?>
 <!doctype html>
 <html lang="pl">
   <head>
@@ -127,7 +147,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="eventListeners.js?v=<?php echo time() ?>" defer></script>
   
   </body>
 </html>

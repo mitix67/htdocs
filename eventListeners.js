@@ -16,6 +16,18 @@ if (document.getElementById('brand') != null) {
     document.getElementById('sendMessageButton').addEventListener('click', function() {
         document.getElementById('playground').innerHTML = '';
     });
+
+    document.getElementById('sendMessageButton2').addEventListener('click', function() {
+        document.getElementById('playground').innerHTML = '';
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'functions.php?brand=0', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('playground').innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send();
+    });
 }
 
 var isFirst = true;
@@ -72,7 +84,12 @@ if(document.getElementById('calendar-btn-left') != null) {
     });
 
     document.getElementById('calendar-btn-right').addEventListener('click', function() {
-        month = date.getMonth() + 1;
+        if (isFirst) {
+            month = date.getMonth() + 2;
+            isFirst = false;
+        }
+        else
+            month = date.getMonth() + 1;
         if (month > 11) 
         {
             month = 0;
@@ -82,7 +99,7 @@ if(document.getElementById('calendar-btn-left') != null) {
         var year = date.getFullYear();
         var day = date.getDate();
         var formattedDate = year + '-' + month + '-' + day;
-        // Send the formattedDate to index.html or perform any other desired action
+
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'calendar.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -265,7 +282,6 @@ if (document.getElementById('form-add-image-file-field') != null) {
         var container = document.getElementById('form-add-image-file-container');
         var input = '<input type="file" class="form-control" id="imagesPath" name="imagesPath[]">';
 
-        console.log('chuj');
         container.innerHTML += input;
 
     });
