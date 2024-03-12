@@ -36,80 +36,42 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="images/logo.png" alt="" width="50" class="d-inline-block align-text-top">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor04" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor04">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Strona główna
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Wyszukiwarka</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Cennik</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">O nas</a>
-        </li> 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
-        </li>
-      </ul>
-   
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+  <div class="row w-100 border-bottom">
+    <div class="col-6">
+      <h2>Panel administracyjny</h2>
     </div>
-  </div>
-</nav>
-<section class="container">
-    <div class="row">
-      <h2>Admin panel</h2>
-        <div class="col-md-6 offset-md-3">
-            <h2>Logout</h2>
-            <p>Are you sure you want to logout?</p>
-            <a href="logout.php"><div class="btn btn-primary">Logout</div></a>
-            
+        <div class="col-6 d-flex justify-content-end">
+            <a href="logout.php"><div class="btn btn-primary">Wyloguj się</div></a>
         </div>
+</nav>
+<section class="container mt-4">
     </div>
     <div class="container">
               <div class="row  justify-content-start">
                 <div class="col-lg-6 col-12">
                   <div class="container">
-                    <div>
-                      <h3>Rezerwacje</h3>
-                      <div id="container">
-                        <?php
-                          require_once 'calendar.php';
-                          $conn = connectToDatabase();
+                    <div class="row d-flex justify-content-start align-items-center" id="container">
+                        <h3>Rezerwacje</h3>
+                        <div class="container">
+                          <?php
+                            require_once 'calendar.php';
+                            $conn = connectToDatabase();
 
-                          generateDivsForReservationsInDatabase($conn);
-                        ?>
+                            generateDivsForReservationsInDatabase($conn);
+                          ?>
+                        </div>
                       </div>
-                    </div>
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                   <div class="container">
-                    <div class="row d-flex justify-content-start align-items-center">
+                    <div class="row d-flex justify-content-center align-items-center">
                       <h3>Lista aut</h3>
-                      <a href="add-car.php"><div class="btn m-2 btn-primary">Dodaj auto</div></a><br>
+                      <div class="btn-group ml-auto">
+                        <a href="add-car.php" class="btn m-2 border border-success text-success">Dodaj auto</a>
+                      </div><br>
                     </div> 
                   </div>
                   <div id="carsList-container">

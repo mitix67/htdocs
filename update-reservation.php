@@ -6,8 +6,18 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
+    <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+  <div class="row w-100 border-bottom">
+    <div class="col-6">
+      <h2>Edytuj rezerwację</h2>
+    </div>
+        <div class="col-6 d-flex justify-content-end">
+            <a href="admin-panel.php"><div class="btn btn-primary">Wróć</div></a>
+        </div>
+      </nav>
         <section class="row">
-            <div class="col-12 p-4">
+            <div class="col-12">
 
 <?php
 
@@ -184,7 +194,7 @@ else if (isset($_POST['submit'])) {
 
     closeConnection($conn);
 
-    if ($result && $resul2) {
+    if ($result && $result2) {
         echo "Values updated successfully.";
         header("refresh:5;url=admin-panel.php");
         echo "<div id='countdown'>Redirecting in: 5</div>";

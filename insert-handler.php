@@ -48,8 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $uploadedFilePath = $uploadDirectory . $fileName;
 
             if (!file_exists($uploadDirectory)) {
-                $uploadDirectory = rawurlencode($uploadDirectory);
                 mkdir($uploadDirectory, 0755, true);
+                $uploadDirectory = rawurlencode($uploadDirectory);
             }
 
             if (move_uploaded_file($fileTmpName, $uploadedFilePath))

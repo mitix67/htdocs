@@ -21,14 +21,24 @@ if (!isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="pl-pl">
 <head>
-    <title>Add Car</title>
+    <title>Dodaj auto</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/4ec8ec9cb4.js" crossorigin="anonymous"></script>
 </head>
+
     <body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="row w-100 border-bottom">
+                <div class="col-6">
+                <h2>Dodaj auto</h2>
+            </div>
+        <div class="col-6 d-flex justify-content-end">
+            <a href="admin-panel.php"><div class="btn btn-primary">Wróć</div></a>
+        </div>
+    </nav>
         <div class="container">
-            <h1>Add Car</h1>
             <form action="insert-handler.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="marka">Marka</label>

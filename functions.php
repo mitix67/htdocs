@@ -21,13 +21,20 @@ function closeConnection($conn) {
 }
 
 function querySelect($conn, $sql) {
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error preparing query: " . $conn->error);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result === false) {
-        die("Error executing query: " . $conn->error);
+        die("Error executing query: " . $stmt->error);
     }
 
     return $result;
+
 }
 
 function generateAllCards($conn) {
@@ -233,14 +240,14 @@ function generateDivsForCarsInDatabase($conn) {
     if ($result->num_rows > 0) {
         while($wiersz = $result->fetch_assoc()) {
             echo '
-            <div class="row mb-2">
+            <div class="row mb-2 mt-2">
                 <div class="col-6">
                     <span>'.$wiersz['marka']." ".$wiersz['model'].'</span>
                 </div>
-                <div class="col-6">
-                    <a href="display-reservation.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Rezerwacje</div></a>
-                    <a href="update-car.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Edytuj</div></a>
-                    <a href="delete-car-handler.php?id='.$wiersz["id"].'"><div class="btn btn-danger">Usuń</div></a>
+                <div class="col-6 mt-2">
+                    <a href="display-reservation.php?id='.$wiersz["id"].'"><div class="mt-1 btn btn-primary">Rezerwacje</div></a>
+                    <a href="update-car.php?id='.$wiersz["id"].'"><div class="mt-1 btn btn-primary">Edytuj</div></a>
+                    <a href="delete-car-handler.php?id='.$wiersz["id"].'"><div class="mt-1 btn btn-danger">Usuń</div></a>
                 </div>
             </div>
             ';

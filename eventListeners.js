@@ -206,6 +206,17 @@ function setReservationOverlay(event, id) {
     console.log('overlay!');
 };
 
+
+function disableReservationOverlay() {
+    document.getElementById('reservation').style.display = 'none';
+    document.getElementById('whole-body').style.opacity = 1;
+    document.getElementById('whole-body').style.backgroundColor = "";
+    document.getElementById('reservation').style.opacity = 0;
+    document.getElementById('whole-body').style.filter = "";
+    document.getElementById('generate-id-here').innerHTML = "";
+}
+
+
 function getDivsWithColorBetween(startDate, endDate) {
     var divs = document.querySelectorAll('.day_num');
     var result = [];

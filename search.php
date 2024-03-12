@@ -6,7 +6,7 @@
     <title>Carrllix</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4ec8ec9cb4.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -58,6 +58,7 @@
     </nav>
     <div id="reservation">
         <div class = "container">
+        <button class="btn" onclick="disableReservationOverlay()"><i class="fa-solid fa-x"></i></button>
         <form method="post" action="reservation.php">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
@@ -197,7 +198,7 @@
                                 <div class="clearfix"></div>
                                 <div class="col-lg-12 text-center">
                                     <div id="success"></div>
-                                    <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Wyślij</button>
+                                    <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Szukaj</button>
                                     <button id="sendMessageButton2" class="btn btn-primary btn-xl text-uppercase" type="button">Czyść</button>
                                 </div>
                             </div>
