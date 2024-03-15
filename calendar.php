@@ -5,7 +5,6 @@ class Calendar {
     private $active_year, $active_month, $active_day;
     private $events = [];
 
-    
     public function __construct($date = null) {
         $this->active_year = $date != null ? date('Y', strtotime($date)) : date('Y');
         $this->active_month = $date != null ? date('m', strtotime($date)) : date('m');
@@ -31,6 +30,7 @@ class Calendar {
         $html = '<div class="calendar">';
         $html .= '<div class="header">';
         $html .= '<div class="month-year" id="month-year">';
+        
         $html .= date('F Y', strtotime($this->active_year . '-' . $this->active_month . '-' . $this->active_day));
         
         $html .= '</div>';
@@ -91,9 +91,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Get the value from the "formattedDate" field
       $date = $_POST["formattedDate"];
       $calendar = new Calendar($date);
-      // Now you can use the $date variable in your script
-      echo $calendar;
-  } else {
-      echo $calendar;
-  }}
+      if (isset($_POST["id"])) {
+            $id = $_POST["id"];
+            $conn = connectToDatabase();
+            $reservations = querySelect($conn, "SELECT * FROM rezerwacje");
+            while ($row = $reservations->fetch_assoc()) 
+            {
+                if ($row['id_samochodu'] == $id)
+                {
+                    $startDate = new DateTime($row['data_rozpoczecia']);
+                    $endDate = new DateTime($row['data_zakonczenia']);
+                    $diff = $endDate->diff($startDate)->days;
+                    $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
+                    $model = getDetailsById($conn, $row['id_samochodu'], 'model');
+                    $combined = $brand . " " . $model;
+                    $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, 'red');
+                }
+                else
+                {
+                    $startDate = new DateTime($row['data_rozpoczecia']);
+                    $endDate = new DateTime($row['data_zakonczenia']);
+                    $diff = $endDate->diff($startDate)->days;
+        
+                    $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
+                    $model = getDetailsById($conn, $row['id_samochodu'], 'model');
+        
+                    $combined = $brand . " " . $model;
+        
+                    $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, 'red');
+                }
+            }
+            echo $calendar;
+        }
+        else 
+        {
+            echo $calendar;
+        }
+    }
+    else{
+        echo $calendar;
+    }
+}
 ?>

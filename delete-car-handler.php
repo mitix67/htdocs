@@ -8,10 +8,26 @@ if(isset($_SESSION['user_id']))
   {
       $conn = connectToDatabase();
       $id = $_GET['id'];
-      $sql2 = "DELETE FROM cennik WHERE id_samochodu = $id";
-      $sql3 = "DELETE FROM images WHERE id_samochodu = $id";
-      $sql = "DELETE FROM samochody WHERE id = $id";
-      if ((querySelect($conn, $sql3) && querySelect($conn, $sql2) && querySelect($conn, $sql)) === TRUE) {
+
+      $sql2 = "DELETE FROM cennik WHERE id_samochodu = ?";
+      $sql3 = "DELETE FROM images WHERE id_samochodu = ?";
+      $sql = "DELETE FROM samochody WHERE id = ?";
+
+      $stmt = $conn->prepare($sql2);
+      $stmt->bind_param("i", $id);
+      $stmt->execute();
+
+      $stmt = $conn->prepare($sql3);
+      $stmt->bind_param("i", $id);
+      $stmt->execute();
+
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("i", $id);
+      $stmt->execute();
+
+      if ($stmt->affected_rows > 0) {
+        // Code for successful deletion
+
           echo "Values deleted successfully.";
           header("refresh:5;url=admin-panel.php");
           echo "<div id='countdown'>Redirecting in: 5</div>";

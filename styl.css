@@ -59,7 +59,7 @@ nav a{
 }
 
 .projects-section {
-  padding: 10rem 0;
+  padding: 1rem 0;
 }
 .projects-section .featured-text {
   padding: 2rem;
@@ -137,6 +137,10 @@ nav a{
 
 .thumbnail.active {
   opacity: 1;
+}
+
+.bg-black {
+  background-color: #000;
 }
 
 .slider-button {

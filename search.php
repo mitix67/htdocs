@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-light navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
             <img src="images/logo.png" alt="" width="50" class="d-inline-block align-text-top">
@@ -27,32 +27,17 @@
             <div class="collapse navbar-collapse" id="navbarColor04">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Strona główna</a>
+                    <a class="nav-link" href="index.php">Strona główna</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Wyszukiwarka</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Cennik</a>
+                    <a class="nav-link active" href="search.php">Wyszukiwarka</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">O nas</a>
-                </li> 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
                 </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Kontakt</a>
+                </li> 
             </div>
         </div>
     </nav>
@@ -252,6 +237,73 @@
                 </div>
             </div>
         </div>
+        <footer class="bg-body-tertiary text-center footer">
+        <div class="container p-0 pb-0">
+            <section class="">
+            <!-- Facebook -->
+            <a data-mdb-ripple-init class="btn text-white btn-floating m-1"
+                style="background-color: #3b5998;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #55acee;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #dd4b39;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #ac2bac;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #0082ca;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <!-- Github -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #333333;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.05);">
+            &copy; 2024 Copyright:
+            <a class="text-body">zwirzaky</a>
+        </div>
+    </footer>
     <script src="eventListeners.js?v=<?php echo time() ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

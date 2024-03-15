@@ -62,49 +62,57 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
                 <div class="form-group">
                     <label for="naped">Naped</label>
-                    <input type="text" class="form-control" id="naped" name="naped">
+                    <select class="form-control" id="naped" name="naped">
+                        <option value="AWD">AWD</option>
+                        <option value="FWD">FWD</option>
+                        <option value="RWD">RWD</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="km">Km</label>
                     <input type="text" class="form-control" id="km" name="km">
                 </div>
                 <div class="form-group">
-                    <label for="historia">Historia</label>
+                    <label for="historia">Historia <p class="text-danger">*pisać w formacie HTML!!!</p></label>
                     <textarea class="form-control" id="historia" name="historia"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="skrzynia">Skrzynia</label>
-                    <input type="text" class="form-control" id="skrzynia" name="skrzynia">
+                    <select class="form-control" id="skrzynia" name="skrzynia">
+                        <option value="Manualna">Manualna</option>
+                        <option value="Automatyczna">Automatyczna</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="czas">Czas</label>
                     <input type="text" class="form-control" id="czas" name="czas">
                 </div>
                 <div class="form-group">
-                    <label for="dobatyk">Dobatyk</label>
+                    <label for="dobatyk">Cena za dobę tygoniową</label>
                     <input type="text" class="form-control" id="dobatyk" name="dobatyk">
                 </div>
                 <div class="form-group">
-                    <label for="dobawek">Dobawek</label>
+                    <label for="dobawek">Cena za dobę weekendową</label>
                     <input type="text" class="form-control" id="dobawek" name="dobawek">
                 </div>
                 <div class="form-group">
-                    <label for="weekend">Weekend</label>
+                    <label for="weekend">Cena za Weekend</label>
                     <input type="text" class="form-control" id="weekend" name="weekend">
                 </div>
                 <div class="form-group">
-                    <label for="tydzien">Tydzien</label>
+                    <label for="tydzien">Cena za Tydzien</label>
                     <input type="text" class="form-control" id="tydzien" name="tydzien">
                 </div>
                 <div class="form-group">
-                    <label for="miesiac">Miesiac</label>
+                    <label for="miesiac">Cena za Miesiac</label>
                     <input type="text" class="form-control" id="miesiac" name="miesiac">
                 </div>
+                <button type="button" class="btn" id="form-add-image-file-field"><i class="fa-solid fa-plus"></i></button>
                 <div class="form-group" id="form-add-image-file-container">
                     <label for="imagesPath">Zdjęcie</label>
+                    
                     <input type="file" class="form-control" id="imagesPath" name="imagesPath[]">
                 </div>
-                <i class="fa-solid fa-plus"><button type="button" class="btn" id="form-add-image-file-field"></button></i>
                 <button type="submit" class="btn btn-primary">Wyślij</button>
             </form>
         </div>

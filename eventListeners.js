@@ -113,6 +113,90 @@ if(document.getElementById('calendar-btn-left') != null) {
     });
 }
 
+if (document.getElementById('admin-panel-container') != null) {
+
+    var date;
+    
+    if (document.getElementById('month-year') == null) 
+    {
+        console.log('month-year is null');
+        date = new Date();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'calendar.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var doc = document.getElementById('admin-panel-container');
+                doc.innerHTML = xhr.responseText;
+            }
+        }
+        var actualDate = new Date();
+        var tempMonth = actualDate.getMonth() + 1;
+        var formattedDate = actualDate.getFullYear() + '-' + tempMonth + '-' + actualDate.getDate();
+        xhr.send("formattedDate=" + formattedDate + "&id=" + 5);
+    }
+    else
+    {
+        date = document.getElementById('month-year');
+        date = date.innerHTML.split(' ');
+        var month = date[0];
+    }
+
+    document.getElementById('calendar-btn-left-admin').addEventListener('click', function() {
+        month = date.getMonth() - 1;
+        if (month < 0) 
+        {
+            month = 11;
+            date.setFullYear(date.getFullYear() - 1);
+        }
+        date.setMonth(month);
+        console.log(month);
+        var year = date.getFullYear();
+        var day = date.getDate();
+        var formattedDate = year + '-' + month + '-' + day;
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'calendar.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+            var doc = document.getElementById('admin-panel-container');
+            doc.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send('formattedDate=' + formattedDate + '&id=' + 5);
+    });
+
+    document.getElementById('calendar-btn-right-admin').addEventListener('click', function() {
+        if (isFirst) {
+            month = date.getMonth() + 2;
+            isFirst = false;
+        }
+        else
+            month = date.getMonth() + 1;
+        if (month > 11) 
+        {
+            month = 0;
+            date.setFullYear(date.getFullYear() + 1);
+        }
+        date.setMonth(month);
+        var year = date.getFullYear();
+        var day = date.getDate();
+        var formattedDate = year + '-' + month + '-' + day;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'calendar.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var doc = document.getElementById('admin-panel-container');
+                doc.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send('formattedDate=' + formattedDate + '&id=' + 5);
+    });
+}
+
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 
@@ -148,16 +232,22 @@ function getDateFromButton(event){
     var formattedDate = year + '-' + month + '-' + date;
 
     var dateJS = new Date(year, month - 1, date);
-
+    var today = new Date();
     if (index == 0)
     {
-        clearColors();
-        startDate = dateJS;
-        event.style.backgroundColor = '#2c7aca';
-        event.style.color = 'white';
-        document.getElementById('reservation-date-start').value = formattedDate;
-        event.setAttribute('data-date', startDate);
-        index++;
+        if (dateJS < today) {
+            alert('You cannot choose a date that has already passed');
+        }
+        else
+        {
+            clearColors();
+            startDate = dateJS;
+            event.style.backgroundColor = '#2c7aca';
+            event.style.color = 'white';
+            document.getElementById('reservation-date-start').value = formattedDate;
+            event.setAttribute('data-date', startDate);
+            index++;
+        }
     }
     else
     {
@@ -170,7 +260,6 @@ function getDateFromButton(event){
 
             if (startDate.getMonth() != endDate.getMonth()) {
                 var divs = getDivsUntilEndDate(endDate);
-                console.log('chuj');
                 setColorForDivsBetween(divs);
             }
             else

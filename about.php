@@ -33,82 +33,22 @@
               <a class="nav-link" href="search.php">Wyszukiwarka</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">O nas</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="contact.php">Kontakt</a>
             </li> 
           </ul>
         </div>
       </div>
     </nav>
-    <header class="masthead">
-        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-            <div class="d-flex justify-content-center">
-                <div class="text-center">
-                    <h1 class="mx-auto my-0 text-uppercase">Carrllix</h1>
-                    <h2 class="text-white-50 mx-auto mt-2 mb-5">Wynajmij swój wymarzony samochód!</h2>
-                    <a class="btn btn-dark" href="search.php">Rozpocznij</a>
-                </div>
-            </div>
+    <section>
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <h1>O nas</h1>
+            <p class="text-justify">Jesteśmy firmą zajmującą się wynajmem samochodów. Nasza oferta obejmuje szeroki wybór samochodów dostosowanych do różnych potrzeb. W naszej ofercie znajdziesz zarówno samochody osobowe, jak i dostawcze. Wypożyczalnia samochodów Carrllix to gwarancja najwyższej jakości usług i konkurencyjnych cen. Zapraszamy do skorzystania z naszej oferty!</p>
         </div>
-    </header>
-    <section class="about-section text-center" id="about">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="text-white mb-4">Wypróbuj swój wymarzony samochód</h2>
-                    <p class="text-white-50">
-                        Posiadamy ogromny wybór samochodów, które możesz wynająć na dowolny okres czasu.
-                        Większość naszej floty to ikoniczne pojazdy z lat 90-tych, które z pewnością zwrócą uwagę innych.
-                    </p>
-                </div>
-            </div>
+        <div class="col-12 col-sm-6">
+            <img src="images/about.jpg" alt="about" class="img-fluid">
         </div>
-    </section>
-    <section class="projects-section bg-light" id="projects">
-        <div class="container px-4 px-lg-5">
-            <!-- Featured Project Row-->
-            <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                <div class="col-xl-8 col-lg-7 m-0 p-0">
-                  <img class="img-fluid mb-lg-0 w-100 p-0 m-0" src="images/lexusis200.webp" alt="..." />
-                </div>
-                <div class="col-xl-4 col-lg-5 m-0 p-0">
-                    <div class="featured-text text-center text-lg-left">
-                        <h4>Lexus is 200</h4>
-                        <p class="text-black-50 mb-0">Następca kultowej AE 86, zmodyfikowany przez renomowanych tunerów.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Project One Row-->
-            <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                <div class="col-lg-6 p-0"><img class="w-100 img-fluid" src="images/toyotasupra.webp" alt="..." /></div>
-                <div class="col-lg-6 p-0">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-white">Toyota Supra mk4</h4>
-                                <p class="mb-0 text-white-50">Ikona japońskiej motoryzacji z legendarnym silnikiem 2JZ-GTE</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Project Two Row-->
-            <div class="row gx-0 justify-content-center">
-                <div class="col-lg-6 p-0"><img class="w-100 img-fluid" src="images/9b0f19cb283a921d8f96e94856a556e7.jpg" alt="..." /></div>
-                <div class="col-lg-6 p-0 order-lg-first">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <h4 class="text-white">Nissan silvia s15</h4>
-                                <p class="mb-0 text-white-50">Legenda driftingu, auto powszechnie używane w najlepszych ligach międzykrajowych</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
     </section>
     <footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
         <div class="container p-0 pb-0">

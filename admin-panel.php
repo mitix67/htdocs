@@ -84,30 +84,15 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
               </div>
             </div>
+            <button class="btn btn-primary" id="calendar-btn-left-admin">Left</button>
+            <button class="btn btn-primary" id="calendar-btn-right-admin">Right</button>
             <div id="calendar-container">
-              <?php
-                $reservations = querySelect($conn, "SELECT * FROM rezerwacje");
-                      
-                $calendar = new Calendar();
+              <div id="admin-panel-container">
 
-                while ($row = $reservations->fetch_assoc()) 
-                {
-                  $startDate = new DateTime($row['data_rozpoczecia']);
-                  $endDate = new DateTime($row['data_zakonczenia']);
-                  $diff = $endDate->diff($startDate)->days;
-      
-                  $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
-                  $model = getDetailsById($conn, $row['id_samochodu'], 'model');
-      
-                  $combined = $brand . " " . $model;
-      
-                  $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, 'red');
-                }
-                echo $calendar;
-              ?>
+              </div>
             </div>
 </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  
+    <script src="eventListeners.js?v=<?php echo time() ?>" defer></script>
   </body>
 </html>

@@ -174,8 +174,10 @@ function generateCard($wynik)
 
 function getDetailsById($conn, $id, $detail)
 {
-    $sql = "SELECT $detail FROM samochody WHERE id='$id'";
-    $result = querySelect($conn, $sql);
+    $stmt = $conn->prepare("SELECT $detail FROM samochody WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -190,8 +192,10 @@ function getDetailsById($conn, $id, $detail)
 //function to get path to 3 images, you must join them by 'id' tables: samochody and images
 function getImagesPathById($conn, $id) 
 {
-    $sql = "SELECT * FROM images WHERE id_samochodu='$id'";
-    $result = querySelect($conn, $sql);
+    $stmt = $conn->prepare("SELECT * FROM images WHERE id_samochodu = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $brand = getDetailsById($conn, $id, 'marka');
     $model = getDetailsById($conn, $id, 'model');
@@ -221,8 +225,10 @@ function getImagesPathById($conn, $id)
 }
 
 function getPricesById($conn,$price, $id) {
-    $sql = "SELECT $price FROM cennik WHERE id_samochodu='$id'";
-    $result = querySelect($conn, $sql);
+    $stmt = $conn->prepare("SELECT * FROM cennik WHERE id_samochodu = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -235,7 +241,9 @@ function getPricesById($conn,$price, $id) {
 
 function generateDivsForCarsInDatabase($conn) {
     $sql = "SELECT * FROM samochody";
-    $result = querySelect($conn, $sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         while($wiersz = $result->fetch_assoc()) {
@@ -257,7 +265,9 @@ function generateDivsForCarsInDatabase($conn) {
 
 function generateDivsForReservationsInDatabase($conn) {
     $sql = "SELECT * FROM rezerwacje";
-    $result = querySelect($conn, $sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         while($wiersz = $result->fetch_assoc()) {
@@ -283,8 +293,6 @@ function getReservationById($conn, $id) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $reservationData = $row['reservation_data'];
-        // Process the reservation data here
-        // ...
         return $reservationData;
     } else {
         return null;
