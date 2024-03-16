@@ -86,7 +86,7 @@ if (!isset($_SESSION['user_id'])) {
             </div>
             <button class="btn btn-primary" id="calendar-btn-left-admin">Left</button>
             <button class="btn btn-primary" id="calendar-btn-right-admin">Right</button>
-            <div id="calendar-container">
+            <div >
               <div id="admin-panel-container">
 
               </div>

@@ -17,82 +17,60 @@
             <a href="admin-panel.php"><div class="btn btn-primary">Wróć</div></a>
         </div>
 </nav>
+
         <section class="row">
             <div class="col-12 p-4">
-
-<?php
-
-require_once 'functions.php';
-require_once 'calendar.php';
-
-if (isset($_SESSION['user_id'])) {
-  if (isset($_GET['id'])) 
-  {
-      $conn = connectToDatabase();
-
-      $reservations = querySelect($conn, "SELECT * FROM rezerwacje");
-
-      $calendar = new Calendar();
-
-      while ($row = $reservations->fetch_assoc()) 
-      {
-          if ($row['id_samochodu'] == $_GET['id'])
-          {
-              $startDate = new DateTime($row['data_rozpoczecia']);
-              $endDate = new DateTime($row['data_zakonczenia']);
-              $diff = $endDate->diff($startDate)->days;
-
-              $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
-              $model = getDetailsById($conn, $row['id_samochodu'], 'model');
-
-              $combined = $brand . " " . $model;
-
-              $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, 'red');
-          }
-      }
-
-      echo $calendar;
-
-      closeConnection($conn);
-  }
-  else {
-      echo "Error: No id parameter provided.";
-      header("refresh:5;url=index.php");
-      echo "<div id='countdown'>Redirecting in: 5</div>";
-      echo "<script>
-          var count = 5;
-          var countdown = setInterval(function() {
-            count--;
-            document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
-            if (count === 0) {
-              clearInterval(countdown);
-            }
-          }, 1000);
-        </script>";
-      exit;
-  }
-} else {
-  echo "Error: You dont have acces to this site.";
-  header("refresh:5;url=index.php");
-  echo "<div id='countdown'>Redirecting in: 5</div>";
-  echo "<script>
-      var count = 5;
-      var countdown = setInterval(function() {
-        count--;
-        document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
-        if (count === 0) {
-          clearInterval(countdown);
-        }
-      }, 1000);
-    </script>";
-  exit;
-  // Handle the error or redirect the user
-  exit;
-}
+              <?php
+              if (isset($_SESSION['user_id'])) {
+                if (isset($_GET['id'])) 
+                {
+                    echo '
+                      <button class="btn btn-primary" id="calendar-btn-left-display">Left</button>
+                      <button class="btn btn-primary" data-id="'.$_GET['id'].'" id="calendar-btn-right-display">Right</button>'
+                    ;
+                }
+                else {
+                    echo "Error: No id parameter provided.";
+                    header("refresh:5;url=index.php");
+                    echo "<div id='countdown'>Redirecting in: 5</div>";
+                    echo "<script>
+                        var count = 5;
+                        var countdown = setInterval(function() {
+                          count--;
+                          document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
+                          if (count === 0) {
+                            clearInterval(countdown);
+                          }
+                        }, 1000);
+                      </script>";
+                    exit;
+                }
+              } else {
+                echo "Error: You dont have acces to this site.";
+                header("refresh:5;url=index.php");
+                echo "<div id='countdown'>Redirecting in: 5</div>";
+                echo "<script>
+                    var count = 5;
+                    var countdown = setInterval(function() {
+                      count--;
+                      document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
+                      if (count === 0) {
+                        clearInterval(countdown);
+                      }
+                    }, 1000);
+                  </script>";
+                exit;
+                // Handle the error or redirect the user
+                exit;
+              }
 
 
-?>
+              ?>
+                <div id="display-panel-container">
+                </div>
+            </div>
         </div>
     </section>
+    <script src="eventListeners.js"></script>
   </body>
 </html>
