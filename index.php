@@ -66,20 +66,18 @@
             </div>
         </div>
     </section>
-    <section class="container-fluid bg-light d-flex justify-content-center">
-        <h3 class="m-2">Sprawdź nasze naklejki!</h3>
-    </section>
-    <section class="container-fluid bg-light d-flex justify-content-center">
+    <h3 class=" text-center bg-light m-0 p-2">Sprawdź nasze naklejki!</h3>
+    <section class="container-fluid m-0 p-0 bg-light d-flex justify-content-center">
+        
         <canvas id="canvas" ></canvas>
-
-    <script src="canvas.js?v=<?php echo time()?>"></script>
+        <script src="canvas.js?v=<?php echo time()?>"></script>
     </section>
     <section class="projects-section bg-light" id="projects">
         <div class="container px-4 px-lg-5">
             <!-- Featured Project Row-->
             <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
                 <div class="col-xl-8 col-lg-7 m-0 p-0">
-                  <img class="img-fluid mb-lg-0 w-100 p-0 m-0" src="images/lexusis200.webp" alt="..." />
+                  <img class="img-fluid mb-lg-0 w-100 p-0 m-0" src="images/lexusis200.webp" alt="..." >
                 </div>
                 <div class="col-xl-4 col-lg-5 m-0 p-0">
                     <div class="featured-text text-center text-lg-left">
@@ -90,7 +88,7 @@
             </div>
             <!-- Project One Row-->
             <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                <div class="col-lg-6 p-0"><img class="w-100 img-fluid" src="images/toyotasupra.webp" alt="..." /></div>
+                <div class="col-lg-6 p-0"><img class="w-100 img-fluid" src="images/toyotasupra.webp" alt="..." ></div>
                 <div class="col-lg-6 p-0">
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
@@ -104,7 +102,7 @@
             </div>
             <!-- Project Two Row-->
             <div class="row gx-0 justify-content-center">
-                <div class="col-lg-6 p-0"><img class="w-100 img-fluid" src="images/9b0f19cb283a921d8f96e94856a556e7.jpg" alt="..." /></div>
+                <div class="col-lg-6 p-0"><img class="w-100 img-fluid" src="images/9b0f19cb283a921d8f96e94856a556e7.jpg" alt="..." ></div>
                 <div class="col-lg-6 p-0 order-lg-first">
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
@@ -120,7 +118,7 @@
     </section>
     <footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
         <div class="container p-0 pb-0">
-            <section class="">
+            <div class="">
             <!-- Facebook -->
             <a data-mdb-ripple-init class="btn text-white btn-floating m-1"
                 style="background-color: #3b5998;"
@@ -177,7 +175,7 @@
                 role="button"
                 ><i class="fab fa-github"></i
             ></a>
-            </section>
+            </div>
             <!-- Section: Social media -->
         </div>
         <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.05);">

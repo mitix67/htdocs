@@ -37,6 +37,8 @@ if (!isset($_SESSION['user_id'])) {
         <div class="col-6 d-flex justify-content-end">
             <a href="admin-panel.php"><div class="btn btn-primary">Wróć</div></a>
         </div>
+    </div>
+        </div>
     </nav>
         <div class="container">
             <form action="insert-handler.php" method="post" enctype="multipart/form-data">
@@ -73,7 +75,8 @@ if (!isset($_SESSION['user_id'])) {
                     <input type="text" class="form-control" id="km" name="km">
                 </div>
                 <div class="form-group">
-                    <label for="historia">Historia <p class="text-danger">*pisać w formacie HTML!!!</p></label>
+                    <label for="historia">Historia </label>
+                    <p class="text-danger">*pisać w formacie HTML!!!</p>
                     <textarea class="form-control" id="historia" name="historia"></textarea>
                 </div>
                 <div class="form-group">
@@ -116,6 +119,73 @@ if (!isset($_SESSION['user_id'])) {
                 <button type="submit" class="btn btn-primary">Wyślij</button>
             </form>
         </div>
+        <footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
+        <div class="container p-0 pb-0">
+            <div class="">
+            <!-- Facebook -->
+            <a data-mdb-ripple-init class="btn text-white btn-floating m-1"
+                style="background-color: #3b5998;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #55acee;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #dd4b39;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #ac2bac;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #0082ca;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <!-- Github -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #333333;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </div>
+            <!-- Section: Social media -->
+        </div>
+        <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.05);">
+            &copy; 2024 Copyright:
+            <a class="text-body">zwirzaky</a>
+        </div>
+    </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="eventListeners.js"></script>
     </body>

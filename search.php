@@ -38,6 +38,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Kontakt</a>
                 </li> 
+            </ul>
             </div>
         </div>
     </nav>
@@ -239,7 +240,7 @@
         </div>
         <footer class="bg-body-tertiary text-center footer">
         <div class="container p-0 pb-0">
-            <section class="">
+            <div class="">
             <!-- Facebook -->
             <a data-mdb-ripple-init class="btn text-white btn-floating m-1"
                 style="background-color: #3b5998;"
@@ -296,7 +297,7 @@
                 role="button"
                 ><i class="fab fa-github"></i
             ></a>
-            </section>
+            </div>
             <!-- Section: Social media -->
         </div>
         <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.05);">

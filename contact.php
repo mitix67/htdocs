@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl-pl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,6 +38,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="contact.php">Kontakt</a>
                 </li> 
+                </ul>
             </div>
         </div>
     </nav>
@@ -92,13 +93,15 @@
                 ?>
             </div>
             <div class="col-12 col-sm-6">
-                <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Loreta%C5%84ska%2016+(Carrllix)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps tracker sport</a></iframe></div>
+                <div style="width: 100%">
+                    <iframe style="width:100%; height: 600px;; border:0; overflow:hidden; margin:0;" src="https://maps.google.com/maps?width=100&amp;height=600&amp;hl=en&amp;q=Loreta%C5%84ska%2016+(Carrllix)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                </div>
             </div>
         </div>
     </section>
     <footer class="bg-body-tertiary text-center footer sticky-bottom">
         <div class="container p-0 pb-0">
-            <section class="">
+            <div class="">
             <!-- Facebook -->
             <a data-mdb-ripple-init class="btn text-white btn-floating m-1"
                 style="background-color: #3b5998;"
@@ -155,7 +158,7 @@
                 role="button"
                 ><i class="fab fa-github"></i
             ></a>
-            </section>
+            </div>
             <!-- Section: Social media -->
         </div>
         <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.05);">

@@ -3,6 +3,8 @@
     <head>
       <title>Update Reservation</title>
         <link rel="stylesheet" href="calendar.css?v=<?php echo time() ?>">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -15,8 +17,10 @@
         <div class="col-6 d-flex justify-content-end">
             <a href="admin-panel.php"><div class="btn btn-primary">Wróć</div></a>
         </div>
+    </div>
+  </div>
       </nav>
-        <section class="row">
+        <div class="row">
             <div class="col-12">
 
 <?php
@@ -49,7 +53,7 @@ if (isset($_GET['id']))
                 // Generate form fields with values
                 echo "<section class='container'>";
                 echo "<div class='row'>";
-                echo "<div class='col-6'>";
+                echo "<div class='col-6 col-md-12'>";
                 echo "<h2>Aktualne wartości</h2>";
 
                 echo "<form method='POST' action='update-car.php'>";
@@ -102,7 +106,7 @@ if (isset($_GET['id']))
                 echo "</form>";
                 echo "</div>";
 
-                echo "<div class='col-6'>";
+                echo "<div class='col-6 col-md-12'>";
                 echo "<h2>Aktualne wartości</h2>";
 
                 echo "<form method='POST' action='update-reservation.php'>";
@@ -232,7 +236,74 @@ else
 }
 ?>
         </div>
-    </section>
+</div>
+<footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
+        <div class="container p-0 pb-0">
+            <div class="">
+            <!-- Facebook -->
+            <a data-mdb-ripple-init class="btn text-white btn-floating m-1"
+                style="background-color: #3b5998;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #55acee;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #dd4b39;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #ac2bac;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #0082ca;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <!-- Github -->
+            <a
+                data-mdb-ripple-init
+                class="btn text-white btn-floating m-1"
+                style="background-color: #333333;"
+                href="#!"
+                role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </div>
+            <!-- Section: Social media -->
+        </div>
+        <div class="text-center p-3 " style="background-color: rgba(0, 0, 0, 0.05);">
+            &copy; 2024 Copyright:
+            <a class="text-body">zwirzaky</a>
+        </div>
+    </footer>
   </body>
 </html>
 <?php
