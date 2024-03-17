@@ -277,8 +277,8 @@ function generateDivsForReservationsInDatabase($conn) {
                     <span>'.$wiersz['data_rozpoczecia']." ".$wiersz['data_zakonczenia'].'</span>
                 </div>
                 <div class="col-6 justify-content-end">
-                    <a href="update-reservation.php?id='.$wiersz["id"].'"><div class="btn btn-primary">Edytuj</div></a>
-                    <a href="delete-reservation-handler.php?id='.$wiersz["id"].'"><div class="btn btn-danger">Usuń</div></a>
+                    <a href="update-reservation.php?id='.$wiersz["id"].'"><div class="btn btn-primary mt-1">Edytuj</div></a>
+                    <a href="delete-reservation-handler.php?id='.$wiersz["id"].'"><div class="btn btn-danger mt-1">Usuń</div></a>
                 </div>
             </div>
             ';

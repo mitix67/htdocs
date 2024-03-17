@@ -73,6 +73,7 @@ prevButton.addEventListener('click', () => {
         thumb.classList.remove('active');
     });
     document.querySelectorAll('.thumbnail')[currentSlide].classList.add('active');
+    
 });
 
 

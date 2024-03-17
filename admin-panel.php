@@ -39,10 +39,11 @@ if (!isset($_SESSION['user_id'])) {
   <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
   <div class="row w-100 border-bottom">
-    <div class="col-6">
+    <div class="col-12 col-md-6">
       <h2>Panel administracyjny</h2>
     </div>
-        <div class="col-6 d-flex justify-content-end">
+        <div class="col-12 col-md-6 d-flex justify-content-end">
+            <a href="add-user.php"><div class="btn btn-primary mr-1">Dodaj użytkownika</div></a>
             <a href="logout.php"><div class="btn btn-primary">Wyloguj się</div></a>
         </div>
 </nav>
@@ -84,8 +85,8 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary" id="calendar-btn-left-admin">Left</button>
-            <button class="btn btn-primary" id="calendar-btn-right-admin">Right</button>
+            <button class="btn btn-primary" id="calendar-btn-left-admin">Poprzedni</button>
+            <button class="btn btn-primary" id="calendar-btn-right-admin">Następny</button>
             <div >
               <div id="admin-panel-container">
 

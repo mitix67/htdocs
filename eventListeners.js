@@ -63,8 +63,8 @@ function generateCalendarById(id) {
             date = date.innerHTML.split(' ');
             var month = date[0];
         }
-
-        document.getElementById('calendar-btn-left').addEventListener('click', function() {
+        var elementLeft = document.getElementById('calendar-btn-left');
+        elementLeft.addEventListener('click', elementLeft.fn=function() {
             month = date.getMonth() - 1;
             if (month < 0) 
             {
@@ -89,7 +89,9 @@ function generateCalendarById(id) {
             xhr.send('formattedDate=' + formattedDate + '&id=' + id);
         });
 
-        document.getElementById('calendar-btn-right').addEventListener('click', function() {
+        var elementRight = document.getElementById('calendar-btn-right');
+
+        elementRight.addEventListener('click', elementRight.fn=function() {
             if (isFirst) {
                 month = date.getMonth() + 2;
                 isFirst = false;
@@ -240,10 +242,19 @@ if (document.getElementById('calendar-container') != null) {
 
         var dateJS = new Date(year, month - 1, date);
         var today = new Date();
+
+        if (event.querySelector('div') != null || event.querySelector('div') != null)
+        {
+            alert('W tej dacie już istnieje rezerwacja');
+            return 0;
+        }
+
+        console.log(document.getElementById('reservation-date-start').querySelector('div') != null || document.getElementById('reservation-date-stop').querySelector('div') != null);
+
         if (index == 0)
         {
             if (dateJS < today) {
-                alert('You cannot choose a date that has already passed');
+                alert('Nie możesz wybrać daty z przeszłości!');
             }
             else
             {
@@ -267,12 +278,31 @@ if (document.getElementById('calendar-container') != null) {
 
                 if (startDate.getMonth() != endDate.getMonth()) {
                     var divs = getDivsUntilEndDate(endDate);
-                    setColorForDivsBetween(divs);
+                    if (divs == 0)
+                    {
+                        alert('W tej dacie już istnieje rezerwacja!');
+                        index = 0;
+                        document.getElementById('reservation-date-start').value = null;
+                        document.getElementById('reservation-date-stop').value = null;
+                        clearColors();
+                    }
+                    else
+                        setColorForDivsBetween(divs);
+                    
                 }
                 else
                 {
                     var divs = getDivsWithColorBetween(startDate, endDate);
-                    setColorForDivsBetween(divs);
+                    if (divs === 0)
+                    {
+                        alert('W tej dacie już istnieje rezerwacja!');
+                        index = 0;
+                        document.getElementById('reservation-date-start').value = null;
+                        document.getElementById('reservation-date-stop').value = null;
+                        clearColors();
+                    }
+                    else
+                        setColorForDivsBetween(divs);
                 }
                 index = 0;
             }
@@ -280,9 +310,12 @@ if (document.getElementById('calendar-container') != null) {
             {
                 alert('End date must be after start date');
             }
-        }
 
+        }
     }
+}
+else{
+    function getDateFromButton(event){}
 }
 
 function setReservationOverlay(event, id) {
@@ -312,7 +345,12 @@ function disableReservationOverlay() {
     document.getElementById('whole-body').style.backgroundColor = "";
     document.getElementById('reservation').style.opacity = 0;
     document.getElementById('whole-body').style.filter = "";
-    document.getElementById('generate-id-here').innerHTML = "";
+
+    var elementLeft = document.getElementById('calendar-btn-left');
+    elementLeft.removeEventListener('click', elementLeft.fn);
+
+    var elementRight = document.getElementById('calendar-btn-right');
+    elementRight.removeEventListener('click', elementRight.fn);
     document.getElementById('calendar-container').innerHTML = "";
 }
 
@@ -321,7 +359,9 @@ function getDivsWithColorBetween(startDate, endDate) {
     var divs = document.querySelectorAll('.day_num');
     var result = [];
     var pushDivs = false;
+    var isNotNull = false;
     divs.forEach((div) => {
+
         var color = div.style.color;
 
         var date = new Date(div.getAttribute('data-date'));
@@ -339,9 +379,16 @@ function getDivsWithColorBetween(startDate, endDate) {
         }
         if (pushDivs == true) {
             result.push(div);
+            if (div.querySelector('div') != null)
+            {
+                isNotNull = true;
+            }
         }
 
     });
+    if (isNotNull == true)
+        result = 0;
+    
     return result;
 }
 
@@ -372,9 +419,15 @@ function getDivsUntilEndDate(endDate) {
     var divs = document.querySelectorAll('.day_num');
     var result = [];
     var pushDivs = true;
+    var isNotNull = false;
 
     divs.forEach((div) => {
         var date = new Date(div.getAttribute('data-date'));
+
+        if (div.querySelector('div') != null)
+        {
+            isNotNull = true;
+        }
 
         if (pushDivs) {
             result.push(div);
@@ -385,6 +438,9 @@ function getDivsUntilEndDate(endDate) {
         }
     });
     console.log(result);
+
+    if (isNotNull == true)
+        result = 0;
     return result;
 }
 

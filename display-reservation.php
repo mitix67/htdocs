@@ -25,8 +25,8 @@
                 if (isset($_GET['id'])) 
                 {
                     echo '
-                      <button class="btn btn-primary" id="calendar-btn-left-display">Left</button>
-                      <button class="btn btn-primary" data-id="'.$_GET['id'].'" id="calendar-btn-right-display">Right</button>'
+                      <button class="btn btn-primary" id="calendar-btn-left-display">Poprzedni</button>
+                      <button class="btn btn-primary" data-id="'.$_GET['id'].'" id="calendar-btn-right-display">Następny</button>'
                     ;
                 }
                 else {

@@ -40,7 +40,14 @@
                                     <label for="password">Hasło</label>
                                     <input type="password" class="form-control" name="password" id="password" placeholder="Wpisz hasło">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Zaloguj się</button>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end align-items-center">
+                                        <a href="index.php">Powrót</a>
+                                    </div>
+                                </div>
                                 <?php
                                     if (isset($_GET['error'])) {
                                         

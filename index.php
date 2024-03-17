@@ -66,6 +66,14 @@
             </div>
         </div>
     </section>
+    <section class="container-fluid bg-light d-flex justify-content-center">
+        <h3 class="m-2">Sprawdź nasze naklejki!</h3>
+    </section>
+    <section class="container-fluid bg-light d-flex justify-content-center">
+        <canvas id="canvas" ></canvas>
+
+    <script src="canvas.js?v=<?php echo time()?>"></script>
+    </section>
     <section class="projects-section bg-light" id="projects">
         <div class="container px-4 px-lg-5">
             <!-- Featured Project Row-->

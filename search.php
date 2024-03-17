@@ -42,13 +42,13 @@
         </div>
     </nav>
     <div id="reservation">
-        <div class = "container">
         <button class="btn" onclick="disableReservationOverlay()"><i class="fa-solid fa-x"></i></button>
+        <div class = "container">
         <form method="post" action="reservation.php">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                <button class="btn btn-primary" id="calendar-btn-left">Left</button>
-                <button class="btn btn-primary" id="calendar-btn-right">Right</button>
+                <button class="btn btn-primary" id="calendar-btn-left">Poprzedni</button>
+                <button class="btn btn-primary" id="calendar-btn-right">Następny</button>
                     <div id="calendar-container">
                     </div>
                 </div>
