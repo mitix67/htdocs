@@ -4,7 +4,7 @@
         <title>Update Car</title>
         <link rel="stylesheet" href="calendar.css?v=<?php echo time() ?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -116,6 +116,11 @@ if (isset($_GET['id']))
                 echo "</div>";
 
                 echo "<div class='form-group'>";
+                echo "<label for='kolor'>Kolor:</label>";
+                echo "<input type='text' value='" . $samochody['kolor'] . "' class='form-control' readonly>";
+                echo "</div>";
+
+                echo "<div class='form-group'>";
                 echo "<label for='czas'>Czas:</label>";
                 echo "<input type='text' value='" . $samochody['czas'] . "' class='form-control' readonly>";
 
@@ -206,6 +211,11 @@ if (isset($_GET['id']))
                 echo "</div>";
 
                 echo "<div class='form-group'>";
+                echo "<label for='kolor'>Kolor:</label>";
+                echo "<input type='text' name='kolor' value='" . $samochody['kolor'] . "' class='form-control'>";
+                echo "</div>";
+
+                echo "<div class='form-group'>";
                 echo "<label for='czas'>Czas:</label>";
                 echo "<input type='text' name='czas' id='czas' value='" . $samochody['czas'] . "' class='form-control'>";
                 
@@ -266,13 +276,14 @@ else if (isset($_POST['submit'])) {
     $weekend = $_POST['weekend'];
     $tydzien = $_POST['tydzien'];
     $miesiac = $_POST['miesiac'];
+    $kolor = $_POST['kolor'];
 
     $conn = connectToDatabase();
-    $query = "UPDATE samochody SET marka=?, model=?, opis=?, sciezka=?, cena=?, rok_produkcji=?, naped=?, km=?, historia=?, skrzynia=?, czas=? WHERE id=?";
+    $query = "UPDATE samochody SET marka=?, model=?, opis=?, sciezka=?, cena=?, rok_produkcji=?, naped=?, km=?, historia=?,kolor=?, skrzynia=?, czas=? WHERE id=?";
     $query2 = "UPDATE cennik SET dobatyk=?, dobawek=?, weekend=?, tydzien=?, miesiac=? WHERE id_samochodu=?";
     
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssssssssi", $marka, $model, $opis, $sciezka, $cena, $rok_produkcji, $naped, $km, $historia, $skrzynia, $czas, $id);
+    $stmt->bind_param("ssssssssssssi", $marka, $model, $opis, $sciezka, $cena, $rok_produkcji, $naped, $km, $historia,$kolor, $skrzynia, $czas, $id);
     $result = $stmt->execute();
     
     $stmt2 = $conn->prepare($query2);

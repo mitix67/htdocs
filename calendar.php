@@ -60,7 +60,7 @@ class Calendar {
             foreach ($this->events as $event) {
                 for ($d = 0; $d <= ($event[2]-1); $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
-                        $html .= '<div class="event' . $event[3] . '">';
+                        $html .= '<div class="event" style="background-color:'. $event[3] .'; font-size: 0.5vw;">';
                         $html .= $event[0];
                         $html .= '</div>';
                     }
@@ -91,16 +91,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Get the value from the "formattedDate" field
       $date = $_POST["formattedDate"];
       $calendar = new Calendar($date);
+      $combined = "";
+      $color = "";
       if (isset($_POST["id"])) {
             $id = $_POST["id"];
             $conn = connectToDatabase();
             if ($id == 5)
             {
                 $reservations = querySelect($conn, "SELECT * FROM rezerwacje");
+
             }
             else
             {
                 $reservations = querySelect($conn, "SELECT * FROM rezerwacje WHERE id_samochodu = $id");
+                $color = getDetailsById($conn, $id, 'kolor');
             }
             while ($row = $reservations->fetch_assoc()) 
             {
@@ -108,12 +112,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $endDate = new DateTime($row['data_zakonczenia']);
                 $diff = $endDate->diff($startDate)->days;
     
-                $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
-                $model = getDetailsById($conn, $row['id_samochodu'], 'model');
-    
-                $combined = $brand . " " . $model;
-    
-                $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, 'red');
+                if ($id == 5)
+                {
+                    $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
+                    $model = getDetailsById($conn, $row['id_samochodu'], 'model');
+                    $combined = $brand . " " . $model;
+                }
+                
+                $color = getDetailsById($conn, $row['id_samochodu'], 'kolor');
+
+
+                $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, $color);
             }
             echo $calendar;
         }

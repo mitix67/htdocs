@@ -23,6 +23,7 @@ if (!isset($_SESSION['user_id'])) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="calendar.css?v=<?php echo time() ?>">
     <title>Carrllix</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <!-- Font Awesome icons (free version)-->
@@ -31,8 +32,6 @@ if (!isset($_SESSION['user_id'])) {
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="styl.css?v=<?php echo time() ?>" rel="stylesheet">
-    <link rel="stylesheet" href="calendar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
@@ -49,52 +48,56 @@ if (!isset($_SESSION['user_id'])) {
       </div>  
     </div>
   </nav>
-<section class="container mt-4">
-    <div class="container">
-              <div class="row  justify-content-start">
-                <div class="col-lg-6 col-12">
+  <section class="container mt-4">
+        <div class="row  justify-content-start">
+          <div class="col-lg-6 col-12">
+            <div class="container">
+              <div class="row d-flex justify-content-start align-items-center" id="container">
+                  <h3>Rezerwacje</h3>
                   <div class="container">
-                    <div class="row d-flex justify-content-start align-items-center" id="container">
-                        <h3>Rezerwacje</h3>
-                        <div class="container">
-                          <?php
-                            require_once 'calendar.php';
-                            $conn = connectToDatabase();
-
-                            generateDivsForReservationsInDatabase($conn);
-                          ?>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-12">
-                  <div class="container">
-                    <div class="row d-flex justify-content-center align-items-center">
-                      <h3>Lista aut</h3>
-                      <div class="btn-group ml-auto">
-                        <a href="add-car.php" class="btn m-2 border border-success text-success">Dodaj auto</a>
-                      </div><br>
-                    </div> 
-                  </div>
-                  <div id="carsList-container">
-                  <?php
-                      require_once 'functions.php';
+                    <?php
+                      require_once 'calendar.php';
                       $conn = connectToDatabase();
-                      echo generateDivsForCarsInDatabase($conn);
+
+                      generateDivsForReservationsInDatabase($conn);
+                      closeConnection($conn);
                     ?>
                   </div>
                 </div>
-              </div>
             </div>
-            <button class="btn btn-primary" id="calendar-btn-left-admin">Poprzedni</button>
-            <button class="btn btn-primary" id="calendar-btn-right-admin">Następny</button>
-            <div >
-              <div id="admin-panel-container">
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="container">
+              <div class="row d-flex justify-content-center align-items-center">
+                <h3>Lista aut</h3>
+                <div class="btn-group ml-auto">
+                  <a href="add-car.php" class="btn m-2 border border-success text-success">Dodaj auto</a>
+                </div><br>
+              </div> 
+            </div>
+            <div id="carsList-container">
+            <?php
+                require_once 'functions.php';
+                $conn = connectToDatabase();
+                echo generateDivsForCarsInDatabase($conn);
+                closeConnection($conn);
+              ?>
+            </div>
+          </div>
+        </div>
+      </div>
 
-              </div>
-            </div>
-</section>
-<footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
+  </section>
+  <section class="container">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary" id="calendar-btn-left-admin">Poprzedni</button>
+        <button class="btn btn-primary" id="calendar-btn-right-admin">Następny</button>
+        <div id="admin-panel-container"></div>
+      </div>
+    </div>
+  </section>
+  <footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
         <div class="container p-0 pb-0">
             <div class="">
             <!-- Facebook -->

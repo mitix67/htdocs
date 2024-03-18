@@ -1,7 +1,7 @@
 <?php
 
 function connectToDatabase() {
-    $host = "localhost";
+    $host = "127.0.0.1";
     $nazwa = "root";
     $haslo = "";
     $baza = "wynajem";
@@ -249,10 +249,10 @@ function generateDivsForCarsInDatabase($conn) {
         while($wiersz = $result->fetch_assoc()) {
             echo '
             <div class="row mb-2 mt-2">
-                <div class="col-6">
-                    <span>'.$wiersz['marka']." ".$wiersz['model'].'</span>
+                <div class="d-flex justify-content-start align-items-center col-6">
+                    <span class="p-2" style="border-bottom: 2px solid'.$wiersz['kolor'].'">'.$wiersz['marka']." ".$wiersz['model'].'</span>
                 </div>
-                <div class="col-6 mt-2">
+                <div class="col-6 mt-2 ">
                     <a href="display-reservation.php?id='.$wiersz["id"].'"><div class="mt-1 btn btn-primary">Rezerwacje</div></a>
                     <a href="update-car.php?id='.$wiersz["id"].'"><div class="mt-1 btn btn-primary">Edytuj</div></a>
                     <a href="delete-car-handler.php?id='.$wiersz["id"].'"><div class="mt-1 btn btn-danger">Usuń</div></a>

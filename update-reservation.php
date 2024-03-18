@@ -4,7 +4,7 @@
       <title>Update Reservation</title>
         <link rel="stylesheet" href="calendar.css?v=<?php echo time() ?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -53,7 +53,7 @@ if (isset($_GET['id']))
                 // Generate form fields with values
                 echo "<section class='container'>";
                 echo "<div class='row'>";
-                echo "<div class='col-6 col-md-12'>";
+                echo "<div class='col-6'>";
                 echo "<h2>Aktualne wartości</h2>";
 
                 echo "<form method='POST' action='update-car.php'>";
@@ -106,7 +106,7 @@ if (isset($_GET['id']))
                 echo "</form>";
                 echo "</div>";
 
-                echo "<div class='col-6 col-md-12'>";
+                echo "<div class='col-6'>";
                 echo "<h2>Aktualne wartości</h2>";
 
                 echo "<form method='POST' action='update-reservation.php'>";

@@ -2,8 +2,9 @@
 <html lang="pl">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Carrllix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, 
+          maximum-scale=1, user-scalable=no">
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <!-- Font Awesome icons (free version)-->
     <script src="https://kit.fontawesome.com/4ec8ec9cb4.js" crossorigin="anonymous"></script>
@@ -15,7 +16,7 @@
     <link href="calendar.css?v=<?php echo time() ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <body>
+  <body style="overflow-x:scroll; min-width:400px;">
     <nav class="navbar navbar-light navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -42,19 +43,19 @@
             </div>
         </div>
     </nav>
-    <div id="reservation">
+    <div id="reservation" class="pb-4">
         <button class="btn" onclick="disableReservationOverlay()"><i class="fa-solid fa-x"></i></button>
         <div class = "container">
         <form method="post" action="reservation.php">
             <div class="row">
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                 <button class="btn btn-primary" id="calendar-btn-left">Poprzedni</button>
                 <button class="btn btn-primary" id="calendar-btn-right">Następny</button>
                     <div id="calendar-container">
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-12 card mt-3">
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 card mt-3">
                     <div class="card-header bg-white">
                         <h3>Twoje dane</h3>
                     </div>
@@ -89,7 +90,7 @@
                         </div>
                     </div>         
                 </div>
-                <div class="col-lg-3 col-md-12 mt-3">
+                <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12 mt-3">
                     <div class="card">
                         <div class="card-header bg-white">
                             <h3>Twoja rezerwacja</h3>
@@ -113,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mt-3">
+                    <div class="card col-xs-12 mt-3">
                         <div class="card-header bg-white">
                             <h3>Podsumowanie</h3>
                         </div>
@@ -238,7 +239,7 @@
                 </div>
             </div>
         </div>
-        <footer class="bg-body-tertiary text-center footer">
+        <footer class="bg-body-tertiary text-center footer fixed-footer" id="footer">
         <div class="container p-0 pb-0">
             <div class="">
             <!-- Facebook -->

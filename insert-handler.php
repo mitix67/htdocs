@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $weekend = $_POST['weekend'];
     $tydzien = $_POST['tydzien'];
     $miesiac = $_POST['miesiac'];
+    $kolor = $_POST['kolor'];
     $imagesPath = $_FILES['imagesPath'];
 
     $conn = connectToDatabase();
@@ -73,9 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo $baseQuery;
     $baseQuery = rawurlencode($baseQuery);
-    $query = "INSERT INTO samochody (marka, model, opis, sciezka, cena, rok_produkcji, naped, km, historia, skrzynia, czas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO samochody (marka, model, opis, sciezka, cena, rok_produkcji, naped, km, historia, kolor, skrzynia, czas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "sssssssssss", $marka, $model, $opis, $firstImage, $cena, $rok_produkcji, $naped, $km, $historia, $skrzynia, $czas);
+    mysqli_stmt_bind_param($stmt, "sssssssssss", $marka, $model, $opis, $firstImage, $cena, $rok_produkcji, $naped, $km, $historia, $kolor, $skrzynia, $czas);
     $result = mysqli_stmt_execute($stmt);
 
     $id = mysqli_insert_id($conn);

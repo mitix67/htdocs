@@ -3,7 +3,8 @@
 <html lang="pl">
     <head>
         <link rel="stylesheet" href="calendar.css?v=<?php echo time() ?>">
-        <title>Display Reservation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rezerwacja</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -17,7 +18,6 @@
             <a href="admin-panel.php"><div class="btn btn-primary">Wróć</div></a>
         </div>
 </nav>
-
         <section class="row">
             <div class="col-12 p-4">
               <?php

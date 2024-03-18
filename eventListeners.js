@@ -320,6 +320,8 @@ else{
 
 function setReservationOverlay(event, id) {
     document.getElementById('reservation').style.display = 'block';
+    document.getElementById('whole-body').style.display = 'none';
+    document.getElementById('footer').style.display = 'none';
     document.getElementById('whole-body').style.opacity = 0.5;
     document.getElementById('whole-body').style.backgroundColor = "gray";
     document.getElementById('reservation').style.opacity = 0.9;
@@ -341,6 +343,8 @@ function setReservationOverlay(event, id) {
 
 function disableReservationOverlay() {
     document.getElementById('reservation').style.display = 'none';
+    document.getElementById('whole-body').style.display = 'block';
+    document.getElementById('footer').style.display = 'block';
     document.getElementById('whole-body').style.opacity = 1;
     document.getElementById('whole-body').style.backgroundColor = "";
     document.getElementById('reservation').style.opacity = 0;
@@ -352,6 +356,7 @@ function disableReservationOverlay() {
     var elementRight = document.getElementById('calendar-btn-right');
     elementRight.removeEventListener('click', elementRight.fn);
     document.getElementById('calendar-container').innerHTML = "";
+    document.getElementById('generate-id-here').innerHTML = "";
 }
 
 

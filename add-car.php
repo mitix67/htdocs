@@ -22,6 +22,9 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="pl-pl">
 <head>
     <title>Dodaj auto</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Wypożyczalnia samochodów">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/4ec8ec9cb4.js" crossorigin="anonymous"></script>
@@ -82,6 +85,13 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="form-group">
                     <label for="skrzynia">Skrzynia</label>
                     <select class="form-control" id="skrzynia" name="skrzynia">
+                        <option value="Manualna">Manualna</option>
+                        <option value="Automatyczna">Automatyczna</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="kolor">Kolor</label>
+                    <select class="form-control" id="kolor" name="kolor">
                         <option value="Manualna">Manualna</option>
                         <option value="Automatyczna">Automatyczna</option>
                     </select>

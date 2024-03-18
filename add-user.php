@@ -27,7 +27,7 @@
                             <label for="password">Hasło:</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add User</button>
+                        <button type="submit" class="btn btn-primary">Dodaj</button>
                         <?php 
                             session_start();
                             if (isset($_SESSION['user_id'])) {
