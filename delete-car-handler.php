@@ -1,11 +1,17 @@
-<?php
-session_start();
-require_once 'functions.php';
+<!DOCTYPE html>
+<html lang="pl">
 
-if(isset($_SESSION['user_id']))
-{
-  if (isset($_GET['id']))
-  {
+<head>
+  <link rel="stylesheet" href="checkmark.css?v=<?php echo time() ?>">
+</head>
+
+<body>
+  <?php
+  session_start();
+  require_once 'functions.php';
+
+  if (isset ($_SESSION['user_id'])) {
+    if (isset ($_GET['id'])) {
       $conn = connectToDatabase();
       $id = $_GET['id'];
 
@@ -26,48 +32,29 @@ if(isset($_SESSION['user_id']))
       $stmt->execute();
 
       if ($stmt->affected_rows > 0) {
-        // Code for successful deletion
-
-          echo "Values deleted successfully.";
-          header("refresh:5;url=admin-panel.php");
-          echo "<div id='countdown'>Redirecting in: 5</div>";
-          echo "<script>
-              var count = 5;
-              var countdown = setInterval(function() {
-                count--;
-                document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
-                if (count === 0) {
-                  clearInterval(countdown);
-                }
-              }, 1000);
-            </script>";
-          exit;
-      } 
-      else 
-      {
-          echo "Error deleting values.";
-      }
-          
-      } else {
-        echo "Error: No id parameter provided.";
-        header("refresh:5;url=admin-panel.php");
-        echo "<div id='countdown'>Redirecting in: 5</div>";
+        echo '<div id="dis">';
+        echo '<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>';
+        echo '</div>';
+        header("refresh:3;url=admin-panel.php");
+        // echo "<div id='countdown'>Redirecting in: 5</div>";
         echo "<script>
-          var count = 5;
-          var countdown = setInterval(function() {
-            count--;
-            document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
-            if (count === 0) {
-              clearInterval(countdown);
-            }
-          }, 1000);
-        </script>";
+            var count = 5;
+            var countdown = setInterval(function() {
+              count--;
+              //document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
+              if (count === 0) {
+                clearInterval(countdown);
+              }
+            }, 1000);
+          </script>";
         exit;
+      } else {
+        echo "Error deleting values.";
       }
-      closeConnection($conn);
-  } else {
-      echo "Error: You dont have acces to this site.";
-      header("refresh:5;url=index.php");
+
+    } else {
+      echo "Error: No id parameter provided.";
+      header("refresh:5;url=admin-panel.php");
       echo "<div id='countdown'>Redirecting in: 5</div>";
       echo "<script>
           var count = 5;
@@ -80,6 +67,27 @@ if(isset($_SESSION['user_id']))
           }, 1000);
         </script>";
       exit;
+    }
+    closeConnection($conn);
+  } else {
+    echo "Error: You dont have acces to this site.";
+    header("refresh:5;url=index.php");
+    echo "<div id='countdown'>Redirecting in: 5</div>";
+    echo "<script>
+          var count = 5;
+          var countdown = setInterval(function() {
+            count--;
+            document.getElementById('countdown').innerHTML = 'Redirecting in: ' + count;
+            if (count === 0) {
+              clearInterval(countdown);
+            }
+          }, 1000);
+        </script>";
+    exit;
   }
 
-?>
+  ?>
+
+</body>
+
+</html>

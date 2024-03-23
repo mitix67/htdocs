@@ -1,28 +1,33 @@
 <?php
 require_once 'functions.php';
-class Calendar {
-    
+class Calendar
+{
+
     private $active_year, $active_month, $active_day;
     private $events = [];
 
-    public function __construct($date = null) {
+    public function __construct($date = null)
+    {
         $this->active_year = $date != null ? date('Y', strtotime($date)) : date('Y');
         $this->active_month = $date != null ? date('m', strtotime($date)) : date('m');
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
     }
 
-    public function add_event($txt, $date, $days = 1, $color = '') {
+    public function add_event($txt, $date, $days = 1, $color = '')
+    {
         $color = $color ? ' ' . $color : $color;
         $this->events[] = [$txt, $date, $days, $color];
     }
 
-    public function clear_events_by_index($index) {
-        if (isset($this->events[$index])) {
+    public function clear_events_by_index($index)
+    {
+        if (isset ($this->events[$index])) {
             unset($this->events[$index]);
         }
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
         $num_days_last_month = date('j', strtotime('last day of previous month', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year)));
         $days = [0 => 'Sun', 1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu', 5 => 'Fri', 6 => 'Sat'];
@@ -30,9 +35,9 @@ class Calendar {
         $html = '<div class="calendar">';
         $html .= '<div class="header">';
         $html .= '<div class="month-year" id="month-year">';
-        
+
         $html .= date('F Y', strtotime($this->active_year . '-' . $this->active_month . '-' . $this->active_day));
-        
+
         $html .= '</div>';
         $html .= '</div>';
         $html .= '<div class="days">';
@@ -46,7 +51,7 @@ class Calendar {
         for ($i = $first_day_of_week; $i > 0; $i--) {
             $html .= '
                 <div class="day_num ignore">
-                    ' . ($num_days_last_month-$i+1) . '
+                    ' . ($num_days_last_month - $i + 1) . '
                 </div>
             ';
         }
@@ -58,9 +63,9 @@ class Calendar {
             $html .= '<div onclick="getDateFromButton(this)" class="day_num' . $selected . '">';
             $html .= '<span>' . $i . '</span>';
             foreach ($this->events as $event) {
-                for ($d = 0; $d <= ($event[2]-1); $d++) {
+                for ($d = 0; $d <= ($event[2] - 1); $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
-                        $html .= '<div class="event" style="background-color:'. $event[3] .'; font-size: 0.5vw;">';
+                        $html .= '<div class="event" style="background-color:' . $event[3] . '; font-size: 0.5vw;">';
                         $html .= $event[0];
                         $html .= '</div>';
                     }
@@ -68,7 +73,7 @@ class Calendar {
             }
             $html .= '</div>';
         }
-        for ($i = 1; $i <= (42-$num_days-max($first_day_of_week, 0)); $i++) {
+        for ($i = 1; $i <= (42 - $num_days - max($first_day_of_week, 0)); $i++) {
             $html .= '
                 <div class="day_num ignore">
                     ' . $i . '
@@ -83,55 +88,47 @@ class Calendar {
 }
 
 
-$calendar = new Calendar(); 
+$calendar = new Calendar();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Check if the "formattedDate" field is set in the POST request
-  if (isset($_POST["formattedDate"])) {
-      // Get the value from the "formattedDate" field
-      $date = $_POST["formattedDate"];
-      $calendar = new Calendar($date);
-      $combined = "";
-      $color = "";
-      if (isset($_POST["id"])) {
+    // Check if the "formattedDate" field is set in the POST request
+    if (isset ($_POST["formattedDate"])) {
+        // Get the value from the "formattedDate" field
+        $date = $_POST["formattedDate"];
+        $calendar = new Calendar($date);
+        $combined = "";
+        $color = "";
+        if (isset ($_POST["id"])) {
             $id = $_POST["id"];
             $conn = connectToDatabase();
-            if ($id == 5)
-            {
+            if ($id == 5) {
                 $reservations = querySelect($conn, "SELECT * FROM rezerwacje");
 
-            }
-            else
-            {
+            } else {
                 $reservations = querySelect($conn, "SELECT * FROM rezerwacje WHERE id_samochodu = $id");
                 $color = getDetailsById($conn, $id, 'kolor');
             }
-            while ($row = $reservations->fetch_assoc()) 
-            {
+            while ($row = $reservations->fetch_assoc()) {
                 $startDate = new DateTime($row['data_rozpoczecia']);
                 $endDate = new DateTime($row['data_zakonczenia']);
                 $diff = $endDate->diff($startDate)->days;
-    
-                if ($id == 5)
-                {
+
+                if ($id == 5) {
                     $brand = getDetailsById($conn, $row['id_samochodu'], 'marka');
                     $model = getDetailsById($conn, $row['id_samochodu'], 'model');
                     $combined = $brand . " " . $model;
                 }
-                
+
                 $color = getDetailsById($conn, $row['id_samochodu'], 'kolor');
 
 
                 $calendar->add_event($combined, $row['data_rozpoczecia'], $diff, $color);
             }
             echo $calendar;
-        }
-        else 
-        {
+        } else {
             echo $calendar;
         }
-    }
-    else{
+    } else {
         echo $calendar;
     }
 }
