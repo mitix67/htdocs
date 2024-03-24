@@ -55,6 +55,11 @@
               $stmt->execute();
               $rezerwacje_dane = $stmt->get_result()->fetch_assoc();
 
+              $stmt = $conn->prepare("SELECT * FROM samochody WHERE id = ?");
+              $stmt->bind_param("i", $rezerwacje['id_samochodu']);
+              $stmt->execute();
+              $samochod = $stmt->get_result()->fetch_assoc();
+
               // Generate form fields with values
               echo "<section class='container'>";
               echo "<div class='row'>";
@@ -106,6 +111,22 @@
               echo "<div class='form-group'>";
               echo "<label for='data_zakonczenia'>Data zakończenia:</label>";
               echo "<input type='date' value='" . $rezerwacje['data_zakonczenia'] . "' readonly required class='form-control'>";
+              echo "</div>";
+              
+              echo "<div class='form-group'>";
+              echo "<label for='marka'>Marka:</label>";
+              echo "<input type='text' value='" . $samochod['marka'] . "' readonly required class='form-control'>";
+              echo "</div>";
+
+              echo "<div class='form-group'>";
+              echo "<label for='model'>Model:</label>";
+              echo "<input type='text' value='" . $samochod['model'] . "' readonly required class='form-control'>";
+              echo "</div>";
+
+              
+              echo "<div class='form-group'>";
+              echo "<label for='naleznosc'>Naleznosc:</label>";
+              echo "<input type='text' value='" . $rezerwacje['naleznosc'] . "' readonly required class='form-control'>";
               echo "</div>";
 
               echo "</form>";
@@ -162,6 +183,11 @@
               echo "<input type='date' name='data_zakonczenia' id='data_zakonczenia' value='" . $rezerwacje['data_zakonczenia'] . "' required class='form-control'>";
               echo "</div>";
 
+              echo "<div class='form-group'>";
+              echo "<label for='naleznosc'>Naleznosc:</label>";
+              echo "<input type='text' name='naleznosc' id='naleznosc' value='" . $rezerwacje['naleznosc'] . "' required class='form-control'>";
+              echo "</div>";
+
               echo "<button type='submit' name='submit' class='btn btn-primary'>Aktualizuj</button>";
               echo "</form>";
               echo "</div>";
@@ -185,19 +211,22 @@
           $miasto = $_POST['miasto'];
           $data_rozpoczecia = $_POST['data_rozpoczecia'];
           $data_zakonczenia = $_POST['data_zakonczenia'];
+          $naleznosc = $_POST['naleznosc'];
 
           // Update the values in the database
           $conn = connectToDatabase();
 
           $query = "UPDATE rezerwacje_dane SET imie = ?, nazwisko = ?, tel = ?, email = ?, adres = ?, kod_pocztowy = ?, miasto = ? WHERE id = ?";
-          $query2 = "UPDATE rezerwacje SET data_rozpoczecia = ?, data_zakonczenia = ? WHERE id = ?";
+          $query2 = "UPDATE rezerwacje SET data_rozpoczecia = ?, data_zakonczenia = ?, naleznosc = ? WHERE id = ?";
+          $query3 = "UPDATE samochody SET marka = ?, model = ? WHERE id = ?";
+
 
           $stmt = $conn->prepare($query);
           $stmt->bind_param("sssssssi", $imie, $nazwisko, $tel, $email, $adres, $kod_pocztowy, $miasto, $id);
           $result = $stmt->execute();
 
           $stmt2 = $conn->prepare($query2);
-          $stmt2->bind_param("ssi", $data_rozpoczecia, $data_zakonczenia, $id);
+          $stmt2->bind_param("sssi", $data_rozpoczecia, $data_zakonczenia, $naleznosc, $id);
           $result2 = $stmt2->execute();
 
           closeConnection($conn);

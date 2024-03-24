@@ -250,6 +250,7 @@ function generateDivsForCarsInDatabase($conn) {
             echo '
             <div class="row mb-2 mt-2">
                 <div class="d-flex justify-content-start align-items-center col-6">
+                    <span class="font-weight-bold">'.$wiersz['id'].' | '.'</span>
                     <span class="p-2" style="border-bottom: 2px solid'.$wiersz['kolor'].'">'.$wiersz['marka']." ".$wiersz['model'].'</span>
                 </div>
                 <div class="col-6 mt-2 ">
@@ -274,6 +275,7 @@ function generateDivsForReservationsInDatabase($conn) {
             echo '
             <div class="row mb-2">
                 <div class="col-6">
+                    <span class="font-weight-bold">'.$wiersz['id_samochodu'].' | '.'</span>
                     <span>'.$wiersz['data_rozpoczecia']." ".$wiersz['data_zakonczenia'].'</span>
                 </div>
                 <div class="col-6 justify-content-end">

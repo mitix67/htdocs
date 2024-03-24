@@ -1,4 +1,3 @@
-
 if (document.getElementById('brand') != null) {
     document.getElementById('brand').addEventListener('change', function() {
         var brand = this.value;
@@ -30,6 +29,30 @@ if (document.getElementById('brand') != null) {
     });
 }
 
+function replaceToPolish()
+{
+    var calendarDate = document.getElementById('month-year').innerHTML;
+    var month = calendarDate.split(' ')[0];
+    
+    var months = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    var polishMonths = [
+        'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
+    ];
+
+    for (var i = 0; i < months.length; i++) {
+        if (month === months[i]) {
+            month = polishMonths[i];
+        }
+    }
+    console.log(month);
+    var year  = calendarDate.split(' ')[1];
+
+    document.getElementById('month-year').innerHTML = month + ' ' + year;
+}
+
 var isFirst = true;
 
 function generateCalendarById(id) {
@@ -50,6 +73,7 @@ function generateCalendarById(id) {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var doc = document.getElementById('calendar-container');
                     doc.innerHTML = xhr.responseText;
+                    replaceToPolish();
                 }
             }
             var actualDate = new Date();
@@ -84,6 +108,7 @@ function generateCalendarById(id) {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var doc = document.getElementById('calendar-container');
                     doc.innerHTML = xhr.responseText;
+                    replaceToPolish();
                 }
             }
             xhr.send('formattedDate=' + formattedDate + '&id=' + id);
@@ -115,6 +140,7 @@ function generateCalendarById(id) {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var doc = document.getElementById('calendar-container');
                     doc.innerHTML = xhr.responseText;
+                    replaceToPolish();
                 }
             }
             xhr.send('formattedDate=' + formattedDate + '&id=' + id);
@@ -137,6 +163,7 @@ if (document.getElementById('admin-panel-container') != null) {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var doc = document.getElementById('admin-panel-container');
                 doc.innerHTML = xhr.responseText;
+                replaceToPolish();
             }
         }
         var actualDate = new Date();
@@ -171,6 +198,7 @@ if (document.getElementById('admin-panel-container') != null) {
             if (xhr.readyState == 4 && xhr.status == 200) {
             var doc = document.getElementById('admin-panel-container');
             doc.innerHTML = xhr.responseText;
+            replaceToPolish();
             }
         }
         xhr.send('formattedDate=' + formattedDate + '&id=' + 5);
@@ -200,25 +228,30 @@ if (document.getElementById('admin-panel-container') != null) {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var doc = document.getElementById('admin-panel-container');
                 doc.innerHTML = xhr.responseText;
+                replaceToPolish();
             }
         }
         xhr.send('formattedDate=' + formattedDate + '&id=' + 5);
     });
 }
 
-var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
 
 
 function convertMonthToInt(month) {
-    var monthIndex = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].indexOf(month);
+    var monthIndex = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'].indexOf(month);
     return monthIndex + 1;
 }
 
 var index = 0;
+var nextTime = false;
+var oneTime = true;
 var startDate = new Date();
 var endDate = new Date();
+var suma_cena = 0;
 if (document.getElementById('calendar-container') != null) {
     function getDateFromButton(event){
+        var divToGenerate = "";
         var date = event.innerHTML;
         date = date.substring(6, date.indexOf('</span>'));
         var calendarDate = document.getElementById('month-year').innerHTML;
@@ -240,7 +273,10 @@ if (document.getElementById('calendar-container') != null) {
 
         var formattedDate = year + '-' + month + '-' + date;
 
+
+
         var dateJS = new Date(year, month - 1, date);
+        //console.log(dateJS);
         var today = new Date();
 
         if (event.querySelector('div') != null || event.querySelector('div') != null)
@@ -253,6 +289,13 @@ if (document.getElementById('calendar-container') != null) {
 
         if (index == 0)
         {
+            if (nextTime)
+            {
+                document.getElementById('cennka').innerHTML = '';
+                document.getElementById('suma').setAttribute('value',0);
+                nextTime = false;
+                suma_cena = 0;
+            }
             if (dateJS < today) {
                 alert('Nie możesz wybrać daty z przeszłości!');
             }
@@ -260,6 +303,7 @@ if (document.getElementById('calendar-container') != null) {
             {
                 clearColors();
                 startDate = dateJS;
+                console.log(startDate, dateJS);
                 event.style.backgroundColor = '#2c7aca';
                 event.style.color = 'white';
                 document.getElementById('reservation-date-start').value = formattedDate;
@@ -269,8 +313,12 @@ if (document.getElementById('calendar-container') != null) {
         }
         else
         {
+            
             endDate = dateJS;
-            if (startDate < endDate) {
+            // console.log(startDate);
+            // console.log(endDate);
+            if (startDate < endDate) 
+            {
                 event.style.backgroundColor = '#2c7aca';
                 event.style.color = 'white';
                 event.setAttribute('data-date', endDate);
@@ -278,6 +326,7 @@ if (document.getElementById('calendar-container') != null) {
 
                 if (startDate.getMonth() != endDate.getMonth()) {
                     var divs = getDivsUntilEndDate(endDate);
+                    console.log(divs);
                     if (divs == 0)
                     {
                         alert('W tej dacie już istnieje rezerwacja!');
@@ -287,12 +336,126 @@ if (document.getElementById('calendar-container') != null) {
                         clearColors();
                     }
                     else
+                    {
+                        console.log('divs');
                         setColorForDivsBetween(divs);
+                        nextTime = true;
+                        var cena = document.getElementById('price').innerHTML;
+                        var cena = cena.split(' ');
+                        var cena_w_tyg = cena[0];
+                        var cena_weekend = cena[1];
+                        var cena_weekendowa = cena[2];
+                        console.log(cena_weekendowa);
+                        var cena_tygodniowa = cena[3];
+                        var cena_miesieczna = cena[4];
+
+                        var daysBetween = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+                        
+                        
+                        if (daysBetween < 7)
+                        {
+                            
+                            for (var i = 0; i <= daysBetween; i++) 
+                            {
+                                console.log(i);
+                                var currentDate = new Date(startDate);
+                                currentDate.setDate(startDate.getDate() + i);
+                                console.log(currentDate.getDay());
+                                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) 
+                                {
+                                    if (currentDate.getDay(startDate.getDate() + i + 1) === 6) 
+                                    {
+                                        suma_cena += parseInt(cena_weekendowa);
+                                        i+=1;
+                                    }
+                                    else
+                                    {
+                                        suma_cena += parseInt(cena_weekend);
+                                    }
+                                }
+                                else
+                                {
+                                    suma_cena += parseInt(cena_w_tyg);
+                                }
+                            }
+                        }
+                        else if(daysBetween < 30 && daysBetween >= 7)
+                        {
+                            var carry = Math.floor(daysBetween / 7);
+                            suma_cena += parseInt(cena_tygodniowa) * carry;
+
+                            for (var i = carry * 7 +1; i <= daysBetween; i++)
+                            {
+                                var currentDate = new Date(startDate);
+                                currentDate.setDate(startDate.getDate() + i);
+                                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) 
+                                {
+                                    if (currentDate.getDay(startDate.getDate() + i + 1) === 0) 
+                                    {
+                                        suma_cena += parseInt(cena_weekendowa);
+                                        i++;
+                                    }
+                                    else
+                                    {
+                                        suma_cena += parseInt(cena_weekend);
+                                    }
+                                }
+                                else
+                                {
+                                    suma_cena += parseInt(cena_w_tyg);
+                                }
+                            }
+                            
+                        }
+                        else if (daysBetween >= 30)
+                        {
+                            var carry = Math.floor(daysBetween / 30);
+                            console.log(carry);
+                            suma_cena += parseInt(cena_miesieczna) * carry;
+
+                            for (var i = carry * 30 +1; i <= daysBetween; i++)
+                            {
+                                var currentDate = new Date(startDate);
+                                currentDate.setDate(startDate.getDate() + i);
+                                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) 
+                                {
+                                    if (currentDate.getDay(startDate.getDate() + i + 1) === 0) 
+                                    {
+                                        suma_cena += parseInt(cena_weekendowa);
+                                        i++;
+                                    }
+                                    else
+                                    {
+                                        suma_cena += parseInt(cena_weekend);
+                                    }
+                                }
+                                else
+                                {
+                                    suma_cena += parseInt(cena_w_tyg);
+                                }
+                            
+                            }
+                        }
+
+                        if (oneTime)
+                        {
+                            document.getElementById("generate-id-here").innerHTML += '<p id="cennka">Suma: ' + suma_cena + ' zł</p>';
+                            divToGenerate = '<input type="number" class="form-control" id="suma" name="suma" value="' + suma_cena + '"required> </div>';
+                            document.getElementById('niewidoczne').innerHTML += divToGenerate;
+                            oneTime = false;
+                        }
+                        else
+                        {
+                            document.getElementById('cennka').innerHTML = 'Suma: ' + suma_cena + ' zł';
+                            document.getElementById('suma').setAttribute('value',suma_cena);
+                        }
+                    }
                     
                 }
                 else
                 {
                     var divs = getDivsWithColorBetween(startDate, endDate);
+                    nextTime = true;
                     if (divs === 0)
                     {
                         alert('W tej dacie już istnieje rezerwacja!');
@@ -302,7 +465,115 @@ if (document.getElementById('calendar-container') != null) {
                         clearColors();
                     }
                     else
+                    {
                         setColorForDivsBetween(divs);
+                        var cena = document.getElementById('price').innerHTML;
+                        var cena = cena.split(' ');
+                        var cena_w_tyg = cena[0];
+                        var cena_weekend = cena[1];
+                        var cena_weekendowa = cena[2];
+                        var cena_tygodniowa = cena[3];
+                        var cena_miesieczna = cena[4];
+
+                        var daysBetween = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+                        
+                        if (daysBetween < 7)
+                        {
+                            
+                            for (var i = 0; i <= daysBetween; i++) 
+                            {
+                                console.log(i);
+                                var currentDate = new Date(startDate);
+                                currentDate.setDate(startDate.getDate() + i);
+                                console.log(currentDate.getDay());
+                                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) 
+                                {
+                                    if (currentDate.getDay(startDate.getDate() + i + 1) === 6) 
+                                    {
+                                        suma_cena += parseInt(cena_weekendowa);
+                                        i+=1;
+                                    }
+                                    else
+                                    {
+                                        suma_cena += parseInt(cena_weekend);
+                                    }
+                                }
+                                else
+                                {
+                                    suma_cena += parseInt(cena_w_tyg);
+                                }
+                            }
+                        }
+                        else if(daysBetween < 30 && daysBetween >= 7)
+                        {
+                            var carry = Math.floor(daysBetween / 7);
+                            suma_cena += parseInt(cena_tygodniowa) * carry;
+
+                            for (var i = carry * 7 +1; i <= daysBetween; i++)
+                            {
+                                var currentDate = new Date(startDate);
+                                currentDate.setDate(startDate.getDate() + i);
+                                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) 
+                                {
+                                    if (currentDate.getDay(startDate.getDate() + i + 1) === 0) 
+                                    {
+                                        suma_cena += parseInt(cena_weekendowa);
+                                        i++;
+                                    }
+                                    else
+                                    {
+                                        suma_cena += parseInt(cena_weekend);
+                                    }
+                                }
+                                else
+                                {
+                                    suma_cena += parseInt(cena_w_tyg);
+                                }
+                            }
+                            
+                        }
+                        else if (daysBetween >= 30)
+                        {
+                            var carry = Math.floor(daysBetween / 30);
+                            console.log(carry);
+                            suma_cena += parseInt(cena_miesieczna) * carry;
+
+                            for (var i = carry * 30 +1; i <= daysBetween; i++)
+                            {
+                                var currentDate = new Date(startDate);
+                                currentDate.setDate(startDate.getDate() + i);
+                                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) 
+                                {
+                                    if (currentDate.getDay(startDate.getDate() + i + 1) === 0) 
+                                    {
+                                        suma_cena += parseInt(cena_weekendowa);
+                                        i++;
+                                    }
+                                    else
+                                    {
+                                        suma_cena += parseInt(cena_weekend);
+                                    }
+                                }
+                                else
+                                {
+                                    suma_cena += parseInt(cena_w_tyg);
+                                }
+                            
+                            }
+                        }
+                        if (oneTime)
+                        {
+                            document.getElementById("generate-id-here").innerHTML += '<p id="cennka">Suma: ' + suma_cena + ' zł</p>';
+                            divToGenerate = '<input type="number" class="form-control" id="suma" name="suma" value="' + suma_cena + '"required> </div>';
+                            document.getElementById('niewidoczne').innerHTML += divToGenerate;
+                            oneTime = false;
+                        }
+                        else
+                        {
+                            document.getElementById('cennka').innerHTML = 'Suma: ' + suma_cena + ' zł';
+                            document.getElementById('suma').setAttribute('value',suma_cena);
+                        }
+                    }
                 }
                 index = 0;
             }
@@ -310,7 +581,6 @@ if (document.getElementById('calendar-container') != null) {
             {
                 alert('End date must be after start date');
             }
-
         }
     }
 }
@@ -333,11 +603,12 @@ function setReservationOverlay(event, id) {
     var textToGen = '<img src="' + img + '" style="width: 50%; height: 50%; object-fit: cover;">';
     console.log(textToGen);
 
-    var divToGenerate = '<div class="form-group d-none"><input type="number" class="form-control" id="id" name="id_samochodu" value="' + id + '"required> </div>'
+    var divToGenerate = '<div class="form-group d-none" id="niewidoczne"><input type="number" class="form-control" id="id" name="id_samochodu" value="' + id + '"required> </div>'
 
     document.getElementById('generate-id-here').innerHTML += textToGen;
     document.getElementById('generate-id-here').innerHTML += divToGenerate;
     console.log('overlay!');
+    
 }
 
 
@@ -352,7 +623,8 @@ function disableReservationOverlay() {
 
     var elementLeft = document.getElementById('calendar-btn-left');
     elementLeft.removeEventListener('click', elementLeft.fn);
-
+    nextTime = false;
+    oneTime = true;
     var elementRight = document.getElementById('calendar-btn-right');
     elementRight.removeEventListener('click', elementRight.fn);
     document.getElementById('calendar-container').innerHTML = "";
@@ -408,7 +680,6 @@ function setColorForDivsBetween(divs) {
             div.style.backgroundColor = '#2c7aca';
             div.style.color = 'white';
         }
-
     });
 }
 
@@ -420,16 +691,19 @@ function clearColors() {
     });
 }
 
+
 function getDivsUntilEndDate(endDate) {
     var divs = document.querySelectorAll('.day_num');
+    console.log(divs);
     var result = [];
     var pushDivs = true;
     var isNotNull = false;
+    var done = false
 
     divs.forEach((div) => {
         var date = new Date(div.getAttribute('data-date'));
 
-        if (div.querySelector('div') != null)
+        if (div.querySelector('div') != null && done == false)
         {
             isNotNull = true;
         }
@@ -440,13 +714,17 @@ function getDivsUntilEndDate(endDate) {
 
         if (date.toString() === endDate.toString()) {
             pushDivs = false;
+            done = true;
         }
     });
-    console.log(result);
 
     if (isNotNull == true)
+    {
         result = 0;
+        return result;
+    }
     return result;
+
 }
 
 if (document.getElementById('form-add-image-file-field') != null) {
@@ -458,6 +736,8 @@ if (document.getElementById('form-add-image-file-field') != null) {
 
     });
 }
+
+
 
 if (document.getElementById('calendar-btn-left-display') != null) {
 
@@ -477,12 +757,14 @@ if (document.getElementById('calendar-btn-left-display') != null) {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var doc = document.getElementById('display-panel-container');
                 doc.innerHTML = xhr.responseText;
+                replaceToPolish();
             }
         }
         var actualDate = new Date();
         var tempMonth = actualDate.getMonth() + 1;
         var formattedDate = actualDate.getFullYear() + '-' + tempMonth + '-' + actualDate.getDate();
         xhr.send("formattedDate=" + formattedDate + "&id=" + id);
+        
     }
     else
     {
@@ -511,9 +793,12 @@ if (document.getElementById('calendar-btn-left-display') != null) {
             if (xhr.readyState == 4 && xhr.status == 200) {
             var doc = document.getElementById('display-panel-container');
             doc.innerHTML = xhr.responseText;
+            replaceToPolish();
             }
         }
         xhr.send('formattedDate=' + formattedDate + '&id=' + id);
+
+        
     });
 
     document.getElementById('calendar-btn-right-display').addEventListener('click', function() {
@@ -540,6 +825,7 @@ if (document.getElementById('calendar-btn-left-display') != null) {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var doc = document.getElementById('display-panel-container');
                 doc.innerHTML = xhr.responseText;
+                replaceToPolish();
             }
         }
         xhr.send('formattedDate=' + formattedDate + '&id=' + id);

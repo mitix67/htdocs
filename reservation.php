@@ -27,14 +27,18 @@
             $data_rozpoczecia = $_POST['data_rozpoczecia'];
             $data_zakonczenia = $_POST['data_zakonczenia'];
             $id_samochodu = $_POST['id_samochodu'];
+            $suma = $_POST['suma'];
 
             $conn = connectToDatabase();
-
+            if ($suma == 0 || $id_samochodu == 0)
+            {
+                return mysqli_error($conn);
+            }
             $stmt = mysqli_prepare($conn, 'INSERT INTO rezerwacje_dane (imie, nazwisko, tel, email, adres, kod_pocztowy, miasto) VALUES (?, ?, ?, ?, ?, ?, ?)');
-            $stmt2 = mysqli_prepare($conn, 'INSERT INTO rezerwacje (data_rozpoczecia, data_zakonczenia, id_samochodu) VALUES (?, ?, ?)');
+            $stmt2 = mysqli_prepare($conn, 'INSERT INTO rezerwacje (data_rozpoczecia, data_zakonczenia, naleznosc, id_samochodu) VALUES (?, ?, ?, ?)');
 
             mysqli_stmt_bind_param($stmt, 'sssssss', $imie, $nazwisko, $tel, $email, $adres, $kod_pocztowy, $miasto);
-            mysqli_stmt_bind_param($stmt2, 'ssi', $data_rozpoczecia, $data_zakonczenia, $id_samochodu);
+            mysqli_stmt_bind_param($stmt2, 'sssi', $data_rozpoczecia, $data_zakonczenia,$suma, $id_samochodu);
 
             if (mysqli_stmt_execute($stmt) && mysqli_stmt_execute($stmt2)) {
                 echo '<div id="dis">';

@@ -3,14 +3,19 @@ require_once 'functions.php';
 class Calendar
 {
 
-    private $active_year, $active_month, $active_day;
+    private $active_year, $active_month, $active_day, $price_day, $price_weekend, $price_weekendowa, $price_tyg, $price_miesiac;
     private $events = [];
 
-    public function __construct($date = null)
+    public function __construct($date = null, $price_day = 0, $price_weekend = 0, $price_weekendowa = 0, $price_tyg = 0, $price_miesiac = 0)
     {
         $this->active_year = $date != null ? date('Y', strtotime($date)) : date('Y');
         $this->active_month = $date != null ? date('m', strtotime($date)) : date('m');
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
+        $this->price_day = $price_day ? $price_day : 0; // Default value for price_day
+        $this->price_weekend = $price_weekend ? $price_weekend : 0; // Default value for price_weekend
+        $this->price_weekendowa = $price_weekendowa ? $price_weekendowa : 0; // Default value for price_weekendowa
+        $this->price_tyg = $price_tyg ? $price_tyg : 0; // Default value for price_tyg
+        $this->price_miesiac = $price_miesiac ? $price_miesiac : 0; // Default value for price_miesiac
     }
 
     public function add_event($txt, $date, $days = 1, $color = '')
@@ -30,10 +35,12 @@ class Calendar
     {
         $num_days = date('t', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year));
         $num_days_last_month = date('j', strtotime('last day of previous month', strtotime($this->active_day . '-' . $this->active_month . '-' . $this->active_year)));
-        $days = [0 => 'Sun', 1 => 'Mon', 2 => 'Tue', 3 => 'Wed', 4 => 'Thu', 5 => 'Fri', 6 => 'Sat'];
+        $days = [0 => 'Mon', 1 => 'Tue', 2 => 'Wed', 3 => 'Thu', 4 => 'Fri', 5 => 'Sat', 6 => 'Sun'];
         $first_day_of_week = array_search(date('D', strtotime($this->active_year . '-' . $this->active_month . '-1')), $days);
         $html = '<div class="calendar">';
         $html .= '<div class="header">';
+        $html .= '<div class="price" id="price" style="display: none">' . $this->price_day . ' ' . $this->price_weekend . ' '. $this->price_weekendowa . ' ' . $this->price_tyg . ' ' . $this->price_miesiac . '</div>';
+
         $html .= '<div class="month-year" id="month-year">';
 
         $html .= date('F Y', strtotime($this->active_year . '-' . $this->active_month . '-' . $this->active_day));
@@ -41,6 +48,7 @@ class Calendar
         $html .= '</div>';
         $html .= '</div>';
         $html .= '<div class="days">';
+        $days = [0 => 'Pon', 1 => 'Wt', 2 => 'Śr', 3 => 'Czw', 4 => 'Pt', 5 => 'Sob', 6 => 'Ndz'];
         foreach ($days as $day) {
             $html .= '
                 <div class="day_name">
@@ -48,6 +56,7 @@ class Calendar
                 </div>
             ';
         }
+        
         for ($i = $first_day_of_week; $i > 0; $i--) {
             $html .= '
                 <div class="day_num ignore">
@@ -103,10 +112,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn = connectToDatabase();
             if ($id == 5) {
                 $reservations = querySelect($conn, "SELECT * FROM rezerwacje");
-
             } else {
                 $reservations = querySelect($conn, "SELECT * FROM rezerwacje WHERE id_samochodu = $id");
+
+                $price_tyg = querySelect($conn, "SELECT dobatyk FROM cennik WHERE id_samochodu = $id")->fetch_assoc()['dobatyk'];
+                $price_weekend = querySelect($conn, "SELECT dobawek FROM cennik WHERE id_samochodu = $id")->fetch_assoc()['dobawek'];
+                $price_weekondowa = querySelect($conn, "SELECT weekend FROM cennik WHERE id_samochodu = $id")->fetch_assoc()['weekend'];
+                $price_tydzien = querySelect($conn, "SELECT tydzien FROM cennik WHERE id_samochodu = $id")->fetch_assoc()['tydzien'];
+                $price_miesiac = querySelect($conn, "SELECT miesiac FROM cennik WHERE id_samochodu = $id")->fetch_assoc()['miesiac'];
+
                 $color = getDetailsById($conn, $id, 'kolor');
+                $calendar = new Calendar($date, $price_tyg, $price_weekend, $price_weekondowa, $price_tydzien, $price_miesiac);
             }
             while ($row = $reservations->fetch_assoc()) {
                 $startDate = new DateTime($row['data_rozpoczecia']);

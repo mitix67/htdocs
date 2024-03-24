@@ -20,7 +20,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body style="cursor: pointer; overflow-x:scroll; min-width:400px;">
+<body style="overflow-x:scroll; min-width:400px;">
     <?php
     session_start();
     if (isset ($_SESSION['user_id'])) {
@@ -167,11 +167,11 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h2 class="section-heading text-uppercase">Wyszukiwarka</h2>
-                        <h3 class="section-subheading text-muted">Znajdź swoje wymarzone auto</h3>
+                        <h3 class="mt-1 section-subheading text-muted">Znajdź swoje wymarzone auto</h3>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 mt-2">
                         <form method="post">
                             <div class="row">
                                 <div class="col-md-6">
