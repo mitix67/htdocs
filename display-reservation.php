@@ -23,8 +23,10 @@
             <div class="btn btn-primary">Wróć</div>
           </a>
         </div>
+      </div>
+    </div>
   </nav>
-  <section class="row">
+  <div class="row">
     <div class="col-12 p-4">
       <?php
       if (isset ($_SESSION['user_id'])) {
@@ -97,8 +99,7 @@
       <div id="display-panel-container">
       </div>
     </div>
-    </div>
-  </section>
+  </div>
   <script src="eventListeners.js"></script>
 </body>
 

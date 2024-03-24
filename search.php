@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Carrllix</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, 
-          maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <!-- Font Awesome icons (free version)-->
     <script src="https://kit.fontawesome.com/4ec8ec9cb4.js" crossorigin="anonymous"></script>
@@ -97,7 +96,7 @@
                             <div class="form-group">
                                 <label for="tel">Numer telefonu</label>
                                 <input name="tel" id="tel" oninput="maxLengthCheck(this)" type="tel" maxlength="9"
-                                    class="form-control" />
+                                    class="form-control" >
                                 <script>
                                     function maxLengthCheck(object) {
                                         if (object.value.length > object.maxLength)

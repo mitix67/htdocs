@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl-pl">
 <head>
     <title>Dodaj użytkownika</title>
     <meta charset="UTF-8">
@@ -18,7 +18,9 @@
             <div class="col-6 d-flex justify-content-end">
                 <a href="admin-panel.php"><div class="btn btn-primary">Wróć</div></a>
             </div>
-        </nav>
+        </div>
+    </div>
+    </nav>
     <div id="lala" class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">

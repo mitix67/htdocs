@@ -216,7 +216,7 @@
 
               echo "<div class='form-group'>";
               echo "<label for='kolor'>Kolor:</label>";
-              echo "<input type='text' name='kolor' value='" . $samochody['kolor'] . "' class='form-control'>";
+              echo "<input type='text' name='kolor' id='kolor' value='" . $samochody['kolor'] . "' class='form-control'>";
               echo "</div>";
 
               echo "<div class='form-group'>";

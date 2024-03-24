@@ -89,11 +89,11 @@
         </div>
     </section>
     <h3 class=" text-center bg-light m-0 p-2">Sprawdź nasze naklejki!</h3>
-    <section class="container-fluid m-0 p-0 bg-light d-flex justify-content-center">
+    <div class="container-fluid m-0 p-0 bg-light d-flex justify-content-center">
 
         <canvas id="canvas"></canvas>
         <script src="canvas.js?v=<?php echo time() ?>"></script>
-    </section>
+    </div>
     <section class="projects-section bg-light" id="projects">
         <div class="container px-4 px-lg-5">
             <!-- Featured Project Row-->

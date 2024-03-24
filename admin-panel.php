@@ -111,7 +111,7 @@ if (!isset ($_SESSION['user_id'])) {
       </div>
     </div>
   </section>
-  <section class="container">
+  <div class="container">
     <div class="row">
       <div class="col-12">
         <button class="btn btn-primary" id="calendar-btn-left-admin">Poprzedni</button>
@@ -119,7 +119,7 @@ if (!isset ($_SESSION['user_id'])) {
         <div id="admin-panel-container"></div>
       </div>
     </div>
-  </section>
+</div>
   <footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
     <div class="container p-0 pb-0">
       <div class="">
