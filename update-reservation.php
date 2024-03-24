@@ -50,8 +50,8 @@
               $stmt->execute();
               $rezerwacje = $stmt->get_result()->fetch_assoc();
 
-              $stmt = $conn->prepare("SELECT * FROM rezerwacje_dane WHERE id = ?");
-              $stmt->bind_param("i", $id);
+              $stmt = $conn->prepare("SELECT * FROM rezerwacje_dane WHERE id_rezerwacji = ?");
+              $stmt->bind_param("i", $rezerwacje['id']);
               $stmt->execute();
               $rezerwacje_dane = $stmt->get_result()->fetch_assoc();
 
@@ -114,12 +114,12 @@
               echo "</div>";
               
               echo "<div class='form-group'>";
-              echo "<label for='marka'>Marka:</label>";
+              echo "<label>Marka:</label>";
               echo "<input type='text' value='" . $samochod['marka'] . "' readonly required class='form-control'>";
               echo "</div>";
 
               echo "<div class='form-group'>";
-              echo "<label for='model'>Model:</label>";
+              echo "<label>Model:</label>";
               echo "<input type='text' value='" . $samochod['model'] . "' readonly required class='form-control'>";
               echo "</div>";
 

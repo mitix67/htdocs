@@ -17,7 +17,7 @@
       $id = $_GET['id'];
 
       $sql2 = "DELETE FROM rezerwacje WHERE id = ?";
-      $sql3 = "DELETE FROM rezerwacje_dane WHERE id = ?";
+      $sql3 = "DELETE FROM rezerwacje_dane WHERE id_rezerwacji = ?";
 
       $stmt2 = $conn->prepare($sql2);
       $stmt2->bind_param("i", $id);

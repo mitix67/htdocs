@@ -42,11 +42,6 @@
                 $fileError = $imagesPath['error'][$i];
                 $fileType = $imagesPath['type'][$i];
 
-                // Perform necessary file validations and processing
-                // For example, you can move the uploaded file to a desired location
-                // using move_uploaded_file() function
-    
-
                 if ($i == 0) {
                     $firstImage = $firstImage . $fileName;
                     $baseQuery = $firstImage . ";";

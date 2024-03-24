@@ -30,17 +30,19 @@
             $suma = $_POST['suma'];
 
             $conn = connectToDatabase();
-            if ($suma == 0 || $id_samochodu == 0)
-            {
-                return mysqli_error($conn);
-            }
-            $stmt = mysqli_prepare($conn, 'INSERT INTO rezerwacje_dane (imie, nazwisko, tel, email, adres, kod_pocztowy, miasto) VALUES (?, ?, ?, ?, ?, ?, ?)');
+
             $stmt2 = mysqli_prepare($conn, 'INSERT INTO rezerwacje (data_rozpoczecia, data_zakonczenia, naleznosc, id_samochodu) VALUES (?, ?, ?, ?)');
-
-            mysqli_stmt_bind_param($stmt, 'sssssss', $imie, $nazwisko, $tel, $email, $adres, $kod_pocztowy, $miasto);
             mysqli_stmt_bind_param($stmt2, 'sssi', $data_rozpoczecia, $data_zakonczenia,$suma, $id_samochodu);
+            $result1 = mysqli_stmt_execute($stmt2);
 
-            if (mysqli_stmt_execute($stmt) && mysqli_stmt_execute($stmt2)) {
+            $id_rezerwacji = mysqli_insert_id($conn);
+
+            $stmt = mysqli_prepare($conn, 'INSERT INTO rezerwacje_dane (imie, nazwisko, tel, email, adres, kod_pocztowy, miasto, id_rezerwacji) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+
+            mysqli_stmt_bind_param($stmt, 'sssssssi', $imie, $nazwisko, $tel, $email, $adres, $kod_pocztowy, $miasto, $id_rezerwacji);
+            $result2 = mysqli_stmt_execute($stmt);
+
+            if ($result2 && $result1) {
                 echo '<div id="dis">';
                 echo '<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>';
                 echo '</div>';
