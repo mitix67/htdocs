@@ -47,18 +47,16 @@
               // Retrieve values from the database
               $id = $_GET['id'];
               $conn = connectToDatabase();
-              $id = $_GET['id'];
 
               $stmt = $conn->prepare("SELECT * FROM samochody WHERE id = ?");
               $stmt->bind_param("i", $id);
               $stmt->execute();
               $samochody = $stmt->get_result()->fetch_assoc();
 
-              $stmt = $conn->prepare("SELECT * FROM cennik WHERE id_samochodu = ?");
-              $stmt->bind_param("i", $id);
-              $stmt->execute();
-              $cennik = $stmt->get_result()->fetch_assoc();
-
+              $stmt2 = $conn->prepare("SELECT * FROM cennik WHERE id_samochodu = ?");
+              $stmt2->bind_param("i", $id);
+              $stmt2->execute();
+              $cennik = $stmt2->get_result()->fetch_assoc();
               // Generate form fields with values
               echo "<section class='container'>";
               echo "<div class='row'>";

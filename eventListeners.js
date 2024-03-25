@@ -463,6 +463,7 @@ if (document.getElementById('calendar-container') != null) {
                         document.getElementById('reservation-date-start').value = null;
                         document.getElementById('reservation-date-stop').value = null;
                         clearColors();
+                        nextTime = false;
                     }
                     else
                     {

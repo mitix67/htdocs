@@ -15,6 +15,24 @@
       $conn = connectToDatabase();
       $id = $_GET['id'];
 
+      $SQL7 = "SELECT * FROM rezerwacje WHERE id_samochodu = ?";
+      $stmt6 = $conn->prepare($SQL7);
+      $stmt6->bind_param("i", $id);
+      $stmt6->execute();
+      $id_rezerwacji = $stmt6->get_result()->fetch_assoc()['id'];
+
+      
+      $sql4 = "DELETE FROM rezerwacje WHERE id_samochodu = ?";
+      $sql5 = "DELETE FROM rezerwacje_dane WHERE id_rezerwacji = ?";
+
+      $stmt4 = $conn->prepare($sql4);
+      $stmt4->bind_param("i", $id);
+      $stmt4->execute();
+
+      $stmt5 = $conn->prepare($sql5);
+      $stmt5->bind_param("i", $id_rezerwacji);
+      $stmt5->execute();
+
       $sql2 = "DELETE FROM cennik WHERE id_samochodu = ?";
       $sql3 = "DELETE FROM images WHERE id_samochodu = ?";
       $sql = "DELETE FROM samochody WHERE id = ?";
