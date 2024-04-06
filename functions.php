@@ -85,7 +85,7 @@ if (isset($_GET['brand'])) {
     $conn = connectToDatabase();
     $brand = $_GET['brand'];
 
-    if ($brand == 0)
+    if ($brand == "0")
     {   
         $conn = connectToDatabase();
         echo generateAllCards($conn);

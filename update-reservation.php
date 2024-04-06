@@ -26,8 +26,9 @@
       </div>
     </div>
   </nav>
-  <div class="row">
-    <div class="col-12">
+  <main>
+    <section class="row">
+      <div class="col-12">
 
       <?php
 
@@ -313,7 +314,8 @@
       }
       ?>
     </div>
-  </div>
+    </section>
+  </main>
   <footer class="bg-body-tertiary text-center bg-light footer sticky-bottom">
     <div class="container p-0 pb-0">
       <div class="">

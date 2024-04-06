@@ -89,7 +89,13 @@ function generateCalendarById(id) {
         }
         var elementLeft = document.getElementById('calendar-btn-left');
         elementLeft.addEventListener('click', elementLeft.fn=function() {
-            month = date.getMonth() - 1;
+            if (isFirst) {
+                month = date.getMonth();
+                isFirst = false;
+            }
+            else
+                month = date.getMonth() - 1;
+
             if (month < 0) 
             {
                 month = 11;
@@ -179,7 +185,12 @@ if (document.getElementById('admin-panel-container') != null) {
     }
 
     document.getElementById('calendar-btn-left-admin').addEventListener('click', function() {
-        month = date.getMonth() - 1;
+        if (isFirst) {
+            month = date.getMonth();
+            isFirst = false;
+        }
+        else
+            month = date.getMonth() - 1;
         if (month < 0) 
         {
             month = 11;
@@ -196,9 +207,9 @@ if (document.getElementById('admin-panel-container') != null) {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-            var doc = document.getElementById('admin-panel-container');
-            doc.innerHTML = xhr.responseText;
-            replaceToPolish();
+                var doc = document.getElementById('admin-panel-container');
+                doc.innerHTML = xhr.responseText;
+                replaceToPolish();
             }
         }
         xhr.send('formattedDate=' + formattedDate + '&id=' + 5);
@@ -775,7 +786,13 @@ if (document.getElementById('calendar-btn-left-display') != null) {
     }
 
     document.getElementById('calendar-btn-left-display').addEventListener('click', function() {
-        month = date.getMonth() - 1;
+       if (isFirst) {
+            month = date.getMonth();
+            isFirst = false;
+        }
+        else
+            month = date.getMonth() - 1;
+        
         if (month < 0) 
         {
             month = 11;

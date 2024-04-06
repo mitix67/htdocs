@@ -70,59 +70,61 @@
             </div>
         </div>
     </header>
-    <section class="container mt-3">
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <h1>Skontaktuj się z nami!</h1>
-                <p class="text-justify">Chcesz zarezerwować samochód, uzyskać więcej informacji lub skonsultować
-                    szczegóły dotyczące naszych usług? Jesteśmy tutaj, aby Ci pomóc! Skorzystaj z jednego z poniższych
-                    sposobów kontaktu, aby się z nami skontaktować:</p>
-                <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-                    <div class="form-group">
-                        <label for="name">Imię i nazwisko:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
+    <main>
+        <section class="container mt-3">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <h1>Skontaktuj się z nami!</h1>
+                    <p class="text-justify">Chcesz zarezerwować samochód, uzyskać więcej informacji lub skonsultować
+                        szczegóły dotyczące naszych usług? Jesteśmy tutaj, aby Ci pomóc! Skorzystaj z jednego z poniższych
+                        sposobów kontaktu, aby się z nami skontaktować:</p>
+                    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+                        <div class="form-group">
+                            <label for="name">Imię i nazwisko:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="message">Wiadomość:</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label for="message">Wiadomość:</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary">Wyślij</button>
-                </form>
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        <button type="submit" class="btn btn-primary">Wyślij</button>
+                    </form>
+                    <?php
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $name = $_POST["name"];
-                    $email = $_POST["email"];
-                    $message = $_POST["message"];
+                        $name = $_POST["name"];
+                        $email = $_POST["email"];
+                        $message = $_POST["message"];
 
-                    $to = "your-email@example.com";
-                    $subject = "New message from contact form";
-                    $body = "Name: $name\nEmail: $email\nMessage: $message";
-                    $headers = "From: $email";
+                        $to = "your-email@example.com";
+                        $subject = "New message from contact form";
+                        $body = "Name: $name\nEmail: $email\nMessage: $message";
+                        $headers = "From: $email";
 
-                    if (@mail($to, $subject, $body, $headers)) {
-                        echo "<p class='text-success'>Email sent successfully!</p>";
-                    } else {
-                        echo "<p class='text-danger'>Failed to send email. Please try again later.</p>";
+                        if (@mail($to, $subject, $body, $headers)) {
+                            echo "<p class='text-success'>Email sent successfully!</p>";
+                        } else {
+                            echo "<p class='text-danger'>Failed to send email. Please try again later.</p>";
+                        }
                     }
-                }
-                ?>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div style="width: 100%">
-                    <iframe style="width:100%; height: 600px;; border:0; overflow:hidden; margin:0;"
-                        src="https://maps.google.com/maps?width=100&amp;height=600&amp;hl=en&amp;q=Loreta%C5%84ska%2016+(Carrllix)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                    ?>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div style="width: 100%">
+                        <iframe style="width:100%; height: 600px;; border:0; overflow:hidden; margin:0;"
+                            src="https://maps.google.com/maps?width=100&amp;height=600&amp;hl=en&amp;q=Loreta%C5%84ska%2016+(Carrllix)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
     <footer class="bg-body-tertiary text-center footer sticky-bottom">
         <div class="container p-0 pb-0">
             <div class="">

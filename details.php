@@ -92,97 +92,99 @@
   <a href="search.php">
     <div class="btn"><i class="fa-solid fa-arrow-left"></i></div>
   </a>
-  <section class="container mt-5">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="slider-container">
-          <?php echo getImagesPathById($conn, $id); ?>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-6">
-            <h2>
-              <?php echo getDetailsById($conn, $id, 'marka');
-              echo " ";
-              echo getDetailsById($conn, $id, 'model'); ?>
-            </h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <p>
-              <?php echo getDetailsById($conn, $id, 'opis'); ?>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="container">
+  <main>
+    <section class="container mt-5">
       <div class="row">
         <div class="col-md-6">
-          <h3>Historia</h3>
-          <p>
-            <?php echo getDetailsById($conn, $id, 'historia'); ?>
+          <div class="slider-container">
+            <?php echo getImagesPathById($conn, $id); ?>
+          </div>
         </div>
-        <div class="flex justify-content-center py-10 col-md-6">
-          <table class="carPriceTable">
-            <thead>
-              <tr>
-                <th class="border-r border-gray-400">CZAS WYPOŻYCZENIA</th>
-                <th class="text-left">CENA</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <p>Doba (pon. - czw.)</p>
-                </td>
-                <td>
-                  <?php echo getPricesById($conn, 'dobatyk', $id) ?> zł
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>Doba weekendowa (pt. - ndz.)</p>
-                </td>
-                <td>
-                  <?php echo getPricesById($conn, 'dobawek', $id) ?> zł
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>Weekend (pt. 16:00 - pon. 10:00)</p>
-                </td>
-                <td>
-                  <?php echo getPricesById($conn, 'weekend', $id) ?> zł
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>Tydzień</p>
-                </td>
-                <td>
-                  <?php echo getPricesById($conn, 'tydzien', $id) ?> zł
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>Miesiąc</p>
-                </td>
-                <td>
-                  <?php echo getPricesById($conn, 'miesiac', $id) ?> zł
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+              <h2>
+                <?php echo getDetailsById($conn, $id, 'marka');
+                echo " ";
+                echo getDetailsById($conn, $id, 'model'); ?>
+              </h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                <?php echo getDetailsById($conn, $id, 'opis'); ?>
+              </p>
+            </div>
+          </div>
         </div>
-
       </div>
-    </div>
-  </section>
+    </section>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Historia</h3>
+            <p>
+              <?php echo getDetailsById($conn, $id, 'historia'); ?>
+          </div>
+          <div class="flex justify-content-center py-10 col-md-6">
+            <table class="carPriceTable">
+              <thead>
+                <tr>
+                  <th class="border-r border-gray-400">CZAS WYPOŻYCZENIA</th>
+                  <th class="text-left">CENA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <p>Doba (pon. - czw.)</p>
+                  </td>
+                  <td>
+                    <?php echo getPricesById($conn, 'dobatyk', $id) ?> zł
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Doba weekendowa (pt. - ndz.)</p>
+                  </td>
+                  <td>
+                    <?php echo getPricesById($conn, 'dobawek', $id) ?> zł
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Weekend (pt. 16:00 - pon. 10:00)</p>
+                  </td>
+                  <td>
+                    <?php echo getPricesById($conn, 'weekend', $id) ?> zł
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Tydzień</p>
+                  </td>
+                  <td>
+                    <?php echo getPricesById($conn, 'tydzien', $id) ?> zł
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Miesiąc</p>
+                  </td>
+                  <td>
+                    <?php echo getPricesById($conn, 'miesiac', $id) ?> zł
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
   <footer class="bg-body-tertiary text-center footer sticky-bottom">
     <div class="container p-0 pb-0">
       <div class="">

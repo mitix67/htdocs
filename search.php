@@ -63,104 +63,106 @@
             </div>
         </div>
     </nav>
-    <div id="reservation" class="pb-4">
-        <button class="btn" onclick="disableReservationOverlay()"><i class="fa-solid fa-x"></i></button>
-        <div class="container">
-            <form method="post" action="reservation.php">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                        <button class="btn btn-primary" id="calendar-btn-left">Poprzedni</button>
-                        <button class="btn btn-primary" id="calendar-btn-right">Następny</button>
-                        <div id="calendar-container" style="z-index: 100;">
+    <main>
+        <section id="reservation" class="pb-4">
+            <button class="btn" onclick="disableReservationOverlay()"><i class="fa-solid fa-x"></i></button>
+            <div class="container">
+                <form method="post" action="reservation.php">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <button class="btn btn-primary" id="calendar-btn-left">Poprzedni</button>
+                            <button class="btn btn-primary" id="calendar-btn-right">Następny</button>
+                            <div id="calendar-container" style="z-index: 100;">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 card mt-3">
-                        <div class="card-header bg-white">
-                            <h3>Twoje dane</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="imie">Imię</label>
-                                <input type="text" class="form-control" id="imie" name="imie" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="nazwisko">Nazwisko</label>
-                                <input type="text" class="form-control" id="nazwisko" name="nazwisko" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" required
-                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-                            </div>
-                            <div class="form-group">
-                                <label for="tel">Numer telefonu</label>
-                                <input name="tel" id="tel" oninput="maxLengthCheck(this)" type="tel" maxlength="9"
-                                    class="form-control" >
-                                <script>
-                                    function maxLengthCheck(object) {
-                                        if (object.value.length > object.maxLength)
-                                            object.value = object.value.slice(0, object.maxLength)
-                                    }
-                                </script>
-
-                            </div>
-                            <div class="form-group">
-                                <label for="adres">Adres</label>
-                                <input type="text" class="form-control" id="adres" name="adres" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="kod_pocztowy">Kod pocztowy</label>
-                                <input type="text" class="form-control" id="kod_pocztowy" name="kod_pocztowy" required
-                                    pattern="[0-9]{2}-[0-9]{3}">
-                            </div>
-                            <div class="form-miasto">
-                                <label for="miasto">Miasto</label>
-                                <input type="text" class="form-control" id="miasto" name="miasto" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12 mt-3">
-                        <div class="card">
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 card mt-3">
                             <div class="card-header bg-white">
-                                <h3>Twoja rezerwacja</h3>
+                                <h3>Twoje dane</h3>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="reservation-date-start">Data rozpoczęcia:</label>
-                                    <input type="date" class="form-control" id="reservation-date-start"
-                                        name="data_rozpoczecia" required readonly>
+                                    <label for="imie">Imię</label>
+                                    <input type="text" class="form-control" id="imie" name="imie" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="reservation-date-stop">Data zakończenia:</label>
-                                    <input type="date" class="form-control" id="reservation-date-stop"
-                                        name="data_zakonczenia" required readonly>
+                                    <label for="nazwisko">Nazwisko</label>
+                                    <input type="text" class="form-control" id="nazwisko" name="nazwisko" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="idnumber">Numer prawa jazdy</label>
-                                    <input type="number" class="form-control" id="idnumber" name="idnumber" required>
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required
+                                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="driversCount">Liczba kierowców</label>
-                                    <input type="number" class="form-control" id="driversCount" name="driversCount"
-                                        required max="4">
+                                    <label for="tel">Numer telefonu</label>
+                                    <input name="tel" id="tel" oninput="maxLengthCheck(this)" type="tel" maxlength="9"
+                                        class="form-control" >
+                                    <script>
+                                        function maxLengthCheck(object) {
+                                            if (object.value.length > object.maxLength)
+                                                object.value = object.value.slice(0, object.maxLength)
+                                        }
+                                    </script>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="adres">Adres</label>
+                                    <input type="text" class="form-control" id="adres" name="adres" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kod_pocztowy">Kod pocztowy</label>
+                                    <input type="text" class="form-control" id="kod_pocztowy" name="kod_pocztowy" required
+                                        pattern="[0-9]{2}-[0-9]{3}">
+                                </div>
+                                <div class="form-miasto">
+                                    <label for="miasto">Miasto</label>
+                                    <input type="text" class="form-control" id="miasto" name="miasto" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-xs-12 mt-3">
-                            <div class="card-header bg-white">
-                                <h3>Podsumowanie</h3>
+                        <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12 mt-3">
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <h3>Twoja rezerwacja</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="reservation-date-start">Data rozpoczęcia:</label>
+                                        <input type="date" class="form-control" id="reservation-date-start"
+                                            name="data_rozpoczecia" required readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reservation-date-stop">Data zakończenia:</label>
+                                        <input type="date" class="form-control" id="reservation-date-stop"
+                                            name="data_zakonczenia" required readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="idnumber">Numer prawa jazdy</label>
+                                        <input type="number" class="form-control" id="idnumber" name="idnumber" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="driversCount">Liczba kierowców</label>
+                                        <input type="number" class="form-control" id="driversCount" name="driversCount"
+                                            required max="4">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body" id="generate-id-here">
-                                <p>Samochód</p>
+                            <div class="card col-xs-12 mt-3">
+                                <div class="card-header bg-white">
+                                    <h3>Podsumowanie</h3>
+                                </div>
+                                <div class="card-body" id="generate-id-here">
+                                    <p>Samochód</p>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Zrób rezerwacje</button>
                             </div>
-                            <button type="submit" class="btn btn-primary">Zrób rezerwacje</button>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    </div>
+                </form>
+            </div>
+        </section>
+    </main>
     <div id="whole-body">
         <section>
             <div class="container">

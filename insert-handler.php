@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <link rel="stylesheet" href="checkmark.css?v=<?php echo time() ?>">
 </head>
-
 <body>
     <?php
     require_once 'functions.php';

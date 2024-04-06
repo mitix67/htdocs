@@ -26,49 +26,50 @@ if (isset ($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-        </div>
-    </nav>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Logowanie</h5>
-                        <form method="post" action="process_login.php">
-                            <div class="form-group">
-                                <label for="username">Nazwa użytkownika</label>
-                                <input type="text" class="form-control" name="username" id="username"
-                                    placeholder="Wpisz nazwę użytkownika">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Hasło</label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                    placeholder="Wpisz hasło">
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-primary">Zaloguj się</button>
+    <main>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+            </div>
+        </nav>
+        <section class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Logowanie</h5>
+                            <form method="post" action="process_login.php">
+                                <div class="form-group">
+                                    <label for="username">Nazwa użytkownika</label>
+                                    <input type="text" class="form-control" name="username" id="username"
+                                        placeholder="Wpisz nazwę użytkownika">
                                 </div>
-                                <div class="col-6 d-flex justify-content-end align-items-center">
-                                    <a href="index.php">Powrót</a>
+                                <div class="form-group">
+                                    <label for="password">Hasło</label>
+                                    <input type="password" class="form-control" name="password" id="password"
+                                        placeholder="Wpisz hasło">
                                 </div>
-                            </div>
-                            <?php
-                            if (isset ($_GET['error'])) {
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end align-items-center">
+                                        <a href="index.php">Powrót</a>
+                                    </div>
+                                </div>
+                                <?php
+                                if (isset ($_GET['error'])) {
 
-                                $brand = $_GET['error'];
-                                echo "<div class='alert alert-danger mt-3' role='alert'>Niepoprawny login lub hasło</div>";
-                            }
-                            ?>
-                        </form>
+                                    $brand = $_GET['error'];
+                                    echo "<div class='alert alert-danger mt-3' role='alert'>Niepoprawny login lub hasło</div>";
+                                }
+                                ?>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
+        </section>
+    </main>
 </body>
 
 </html>
