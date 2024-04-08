@@ -2,9 +2,9 @@
 
 function connectToDatabase() {
     $host = "127.0.0.1";
-    $nazwa = "root";
-    $haslo = "";
-    $baza = "wynajem";
+    $nazwa = "s168691";
+    $haslo = "myoXJ7fsql";
+    $baza = "s168691";
     $conn = new mysqli($host, $nazwa, $haslo, $baza);
     // Check connection
 

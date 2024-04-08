@@ -302,10 +302,10 @@
 
                 <!-- Linkedin -->
                 <a data-mdb-ripple-init class="btn text-white btn-floating m-1" style="background-color: #0082ca;"
-                    href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+                    href="https://www.linkedin.com/in/mateusz-burzy%C5%84ski-5ab71227a/" role="button"><i class="fab fa-linkedin-in"></i></a>
                 <!-- Github -->
                 <a data-mdb-ripple-init class="btn text-white btn-floating m-1" style="background-color: #333333;"
-                    href="#!" role="button"><i class="fab fa-github"></i></a>
+                    href="https://github.com/zwirzaky" role="button"><i class="fab fa-github"></i></a>
             </div>
             <!-- Section: Social media -->
         </div>
